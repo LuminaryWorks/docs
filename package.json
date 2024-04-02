@@ -1,0 +1,14 @@
+{
+  "name": "@luminaryworks/docs",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LuminaryWorks ecosystem marketing & developer portal (RsPress)",
+  "scripts": {
+    "dev": "rspress dev",
+    "build": "rspress build",
+    "preview": "rspress preview"
+  },
+  "devDependencies": {
+    "rspress": "^1.43.0"
+  }
+}
