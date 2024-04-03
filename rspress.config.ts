@@ -5,6 +5,8 @@ export default defineConfig({
   root: "docs",
   title: "LuminaryWorks",
   description: "AI 原生开源生态 — 学 · 连 · 看 · 控 · 赚",
+  icon: "/logo.png",
+  logo: "/logo.png",
   logoText: "LuminaryWorks",
   globalStyles: path.join(__dirname, "styles/index.css"),
   themeConfig: {
