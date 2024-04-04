@@ -1,8 +1,8 @@
-# 新人上手指南（五产品通用）
+# 新人上手指南（六产品通用）
 
-无论你在 **MetaRepo（Vibe Code 编排仓）** 还是 **子仓库（前端 / 后端 / 文档）** 开发，按下面三步即可跑通本地环境。
+无论你在 **MetaRepo** 还是 **子仓库** 开发，按下面三步即可跑通本地环境。
 
-## 0. 推荐目录布局
+## 0. 推荐目录布局（Phase C）
 
 ```text
 D:\www\
@@ -10,11 +10,12 @@ D:\www\
 │   ├── docs\          # 本文档站（公开）
 │   ├── identity\      # 统一登录 Logto（私有）
 │   └── shared\        # @luminaryworks/* 共享库（私有）
-├── DataLuminary\DataLuminary-Platform\   # MetaRepo
-├── BlockyEdu\VibeEdu\                    # MetaRepo
-├── AgentSkillMesh\VibeAgent\             # MetaRepo
-├── VistaRemote\                          # MetaRepo（vibeCode）
-└── LuminaryIoTChain\                     # MetaRepo（拆解中）
+├── dataluminary\      # DataLuminary · 数据明鉴
+├── blockyedu\         # BlockyEdu · 智码工坊
+├── doerflow\          # DoerFlow · 智工网
+├── vistacast\         # VistaCast · 视界云遥（规划 spec，暂无实现仓）
+├── vistaremote\       # VistaRemote · 视界远程（远程桌面）
+└── syncrobrain\       # SyncroBrain · 万物智脑
 ```
 
 ## 1. 生态公共步骤（所有产品必做）
@@ -25,43 +26,35 @@ D:\www\
 | 共享库 | `cd LuminaryWorks/shared && pnpm install && pnpm build` | 消费方依赖 `@luminaryworks/auth-core` |
 | 注册应用 | `identity` 仓内 `node scripts/register-apps.mjs` | 输出 `registered-apps.json` → 各产品 `.env` |
 
-`.npmrc`（从 GitHub Packages 安装共享库时）：
+## 2. 六产品上手矩阵
 
-```ini
-@luminaryworks:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-```
+### 编码优先级
 
-## 2. 五产品上手矩阵
+| 优先级 | 产品 | 说明 |
+|--------|------|------|
+| **P0** | DataLuminary、BlockyEdu | 当前主力开发 |
+| P1 | DoerFlow、SyncroBrain | 并行迭代 |
+| 文档先行 | **VistaCast** | 仅 spec，见 `D:\www\vistacast\spec\` |
+| 维护 | **VistaRemote** | 远程桌面已有基线，`D:\www\vistaremote` |
 
-### 在 MetaRepo 开发（编排 / Spec / 跨仓脚本）
+### 在 MetaRepo 开发
 
-| 产品 | MetaRepo | 一键初始化 | 常用命令 |
-|------|----------|-----------|----------|
-| **DataLuminary** | [DataLuminary-Platform](https://github.com/DataLuminary/DataLuminary-Platform) | [ONBOARDING](https://github.com/DataLuminary/DataLuminary-Platform/blob/main/ONBOARDING.md) | `pnpm dev:view` `dev:talk` `dev:docs` |
-| **BlockyEdu** | [VibeEdu](https://github.com/BlockyEdu/VibeEdu) | [ONBOARDING](https://github.com/BlockyEdu/VibeEdu/blob/main/ONBOARDING.md) | Spec → contracts → 子仓 |
-| **VibeAgent** | [VibeAgent](https://github.com/AgentSkillMesh/VibeAgent) | [ONBOARDING](https://github.com/AgentSkillMesh/VibeAgent/blob/main/ONBOARDING.md) | `repos/api` `repos/web` |
-| **VistaRemote** | [vibeCode](https://github.com/VistaRemote/vibeCode) | [ONBOARDING](https://github.com/VistaRemote/vibeCode/blob/main/ONBOARDING.md) | `pnpm dev:mvp` |
-| **LuminaryIoTChain** | [LuminaryIoTChain](https://github.com/LuminaryIoTChain/LuminaryIoTChain) | [ONBOARDING](https://github.com/LuminaryIoTChain/LuminaryIoTChain/blob/master/ONBOARDING.md) | `deploy/` + `services/` |
+| 品牌 | MetaRepo | 状态 |
+|------|----------|------|
+| **DataLuminary** | [DataLuminary-Platform](https://github.com/dataluminary/DataLuminary-Platform) | ✅ |
+| **BlockyEdu** | [VibeEdu](https://github.com/blockyedu/VibeEdu) | ✅ |
+| **DoerFlow** | [VibeAgent](https://github.com/doerflow/VibeAgent) | ✅ |
+| **VistaCast** | 规划 — [spec/products/vistacast](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/products/vistacast.md) | 📋 文档 |
+| **VistaRemote** | [VistaRemote/vibeCode](https://github.com/VistaRemote/vibeCode) | ✅ `./init.ps1` |
+| **SyncroBrain** | [LuminaryIoTChain](https://github.com/syncrobrain/LuminaryIoTChain) | ✅ |
 
-各 MetaRepo 根目录均有 **ONBOARDING.md**（或 README「快速开始」）— 以该文件为准。
+### VistaCast vs VistaRemote
 
-### 在子仓库单独开发（只改前端 / 只改后端）
-
-| 产品 | 子仓示例 | 克隆方式 | 依赖 MetaRepo？ |
-|------|----------|----------|----------------|
-| DataLuminary | `DataView` `DataTalk` `ProductWhitePaper` | MetaRepo `init.sh` 或单独 clone | 建议 MetaRepo 根目录 `pnpm install` |
-| BlockyEdu | `server` `edu-app-web` `code-app-web` | [BlockyEdu 组织](https://github.com/BlockyEdu) 各仓 | Spec/合同在 VibeEdu |
-| VibeAgent | `api` `web` | [AgentSkillMesh](https://github.com/AgentSkillMesh) | 规格在 VibeAgent MetaRepo |
-| VistaRemote | `server` `web` `desktop` … | `vibeCode/init.sh` | 协议在 `shared` |
-| LuminaryIoTChain | `iot-gateway` `iot-console-web`（规划独立仓） | 暂在 MetaRepo `services/` | [拆解计划](https://github.com/LuminaryIoTChain/LuminaryIoTChain/blob/master/plan/repository-split.md) |
-
-**子仓开发最小清单：**
-
-1. 完成上文「生态公共步骤」1～3
-2. 进入子仓 `pnpm install`（配置 `.npmrc` 若用 GitHub Packages）
-3. 复制 `.env.example` → `.env`，填入 `IDP_*` / `VITE_IDP_*`
-4. 启动子仓 `dev` 脚本
+| | VistaCast | VistaRemote |
+|---|-----------|-------------|
+| 做什么 | AI 固定摄像头监控 | WebRTC 远程桌面 |
+| 本地路径 | `D:\www\vistacast\spec\` | `D:\www\vistaremote\` |
+| 能否跑起来 | 暂无 — 等 P0 完成后启动编码 | `.\init.ps1` → `pnpm dev:mvp` |
 
 ## 3. 本地端口速查
 
@@ -69,31 +62,15 @@ D:\www\
 |------|------|
 | Identity OIDC / Admin | 3001 / 3002 |
 | DataView / DataTalk | 3003 / 8084 |
-| DataTalk PostgreSQL | 5433 |
 | VibeEdu edu-app | 18082 |
-| VibeAgent web / api | 5174 / 13008 |
+| DoerFlow web / api | 5174 / 13008 |
 | VistaRemote admin | 5175 |
 | iot-console / gateway | 5180 / 13100 |
-| IoT PostgreSQL | 5434 |
-| EMQX / Mosquitto | 1883 |
 
 ## 4. 文档去哪找
 
 | 需求 | 位置 |
 |------|------|
-| 生态叙事 | [guide/ecosystem](/guide/ecosystem) |
+| VistaCast 规划 | [products/vistacast](/products/vistacast) · `spec/products/vistacast.md` |
+| VistaRemote | [products/vistaremote](/products/vistaremote) · `D:\www\vistaremote\spec\` |
 | 统一登录 | [develop/unified-login](/develop/unified-login) |
-| 登录/权限路线图 | [develop/identity-roadmap](/develop/identity-roadmap) |
-| 数据存储（后台弃 MySQL · 默认 PG） | [develop/datastore](/develop/datastore) |
-| 共享库 | [develop/shared-packages](/develop/shared-packages) |
-| 产品 MetaRepo Spec | 各仓 `spec/` 目录 |
-| 对外产品说明 | 各组织 **公开 docs 仓**（如 BlockyEdu/docs） |
-
-## 5. 常见卡点
-
-| 现象 | 处理 |
-|------|------|
-| `pnpm install` 403 `@luminaryworks/*` | 配置 `.npmrc` + PAT（`read:packages`）或 `file:` 指向 `LuminaryWorks/shared` 并先 `pnpm build` |
-| DataTalk 连不上库 | 确认 `pnpm db:up`（PostgreSQL `:5433`），非 MySQL |
-| OIDC 回调 404 | 检查 Logto 注册的 Redirect URI 与前端路由一致 |
-| 只 clone 子仓缺 Spec | 再 clone 对应 MetaRepo，或读 LuminaryWorks/docs |

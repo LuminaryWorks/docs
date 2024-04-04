@@ -32,7 +32,7 @@
 |------|------|------|
 | REST | OpenAPI 3.1 | 各产品 `contracts/` |
 | 身份 | OIDC + `pal.v1.yaml` | DataLuminary `spec/contracts/`（→ LuminaryWorks/contracts） |
-| MQTT | Topic 表 | LuminaryIoTChain `spec/` |
+| MQTT | Topic 表 | SyncroBrain `spec/` |
 | 事件 | CloudEvents | Kafka topic 在 spec 登记 |
 
 ## 版本兼容

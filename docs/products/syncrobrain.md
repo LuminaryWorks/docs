@@ -1,6 +1,6 @@
-# LuminaryIoTChain · IoT PaaS
+# SyncroBrain · 万物智脑
 
-> 角色 **连** · 组织 [LuminaryIoTChain](https://github.com/LuminaryIoTChain) · MetaRepo [LuminaryIoTChain](https://github.com/LuminaryIoTChain/LuminaryIoTChain)
+> 角色 **连** · 组织 [syncrobrain](https://github.com/syncrobrain) · MetaRepo [LuminaryIoTChain](https://github.com/syncrobrain/LuminaryIoTChain)
 
 开源、AI 驱动的 IoT PaaS：参考涂鸦类生态，以更低成本为硬件厂商提供设备接入、多租户控制台、规则引擎与 App 能力。Apache/MIT 栈，可私有化部署。
 
@@ -26,7 +26,7 @@
 ## 与闭源 IoT 云差异
 
 - **开源可私有化**，许可与扩容成本更低
-- **不止设备管理**：AI 推理（AgentSkillMesh）+ 专业大屏（DataLuminary）+ 远程运维（VistaRemote）
+- **不止设备管理**：AI 推理（DoerFlow）+ 专业大屏（DataLuminary）+ 远程运维（VistaCast）
 - **BlockyEdu AI 辅助接入**，缩短固件与 MQTT 联调周期
 - **标准协议**：MQTT、REST、OIDC，无厂商锁定
 
@@ -36,8 +36,8 @@
 设备 ──MQTT──► EMQX ──► ThingsBoard / iot-gateway ──API──► 控制台 & App
                               │
                               ├──► DataLuminary 大屏
-                              ├──► AgentSkillMesh 推理
-                              └──► VistaRemote 远程维护
+                              ├──► DoerFlow 推理
+                              └──► VistaCast 远程维护
 ```
 
 ## 数据存储
@@ -49,14 +49,14 @@
 
 ## 仓库模型
 
-对齐 BlockyEdu：**公开 docs**、**私有** MetaRepo + gateway + console — [repository-split 计划](https://github.com/LuminaryIoTChain/LuminaryIoTChain/blob/master/plan/repository-split.md)
+对齐 BlockyEdu：**公开 docs**、**私有** MetaRepo + gateway + console — [repository-split 计划](https://github.com/syncrobrain/LuminaryIoTChain/blob/master/plan/repository-split.md)
 
 ## 快速开始
 
 ```bash
-git clone https://github.com/LuminaryIoTChain/LuminaryIoTChain.git
+git clone https://github.com/syncrobrain/LuminaryIoTChain.git
 cd LuminaryIoTChain
 # 详见 ONBOARDING.md
 ```
 
-[新人上手（IoT）](https://github.com/LuminaryIoTChain/LuminaryIoTChain/blob/main/ONBOARDING.md) · [生态新人指南](/develop/onboarding) · [统一登录](/develop/unified-login)
+[新人上手（IoT）](https://github.com/syncrobrain/LuminaryIoTChain/blob/main/ONBOARDING.md) · [生态新人指南](/develop/onboarding) · [统一登录](/develop/unified-login)

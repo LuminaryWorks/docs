@@ -63,9 +63,10 @@ VITE_IDP_REDIRECT_URI=http://localhost:<port>/auth/callback
 
 | 前缀 | 产品 |
 |------|------|
-| `iot.*` | LuminaryIoTChain |
-| `agent.*` | VibeAgent |
+| `iot.*` | SyncroBrain |
+| `agent.*` | DoerFlow |
+| `cast.*` | VistaCast |
 | `remote.*` | VistaRemote |
-| `edu.*` | VibeEdu |
+| `edu.*` | BlockyEdu |
 
 详见 [共享库 @luminary/*](./shared-packages)。

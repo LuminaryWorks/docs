@@ -1,7 +1,7 @@
 # 登录 · 权限 · 用户对接路线图
 
-> 状态矩阵：[unified-login-status](https://github.com/DataLuminary/DataLuminary-Platform/blob/main/spec/unified-login-status.md)  
-> PAL 规格：[luminary-identity-pal-spec](https://github.com/DataLuminary/DataLuminary-Platform/blob/main/spec/luminary-identity-pal-spec.md)
+> 状态矩阵：[unified-login-status](https://github.com/dataluminary/DataLuminary-Platform/blob/main/spec/unified-login-status.md)  
+> PAL 规格：[luminary-identity-pal-spec](https://github.com/dataluminary/DataLuminary-Platform/blob/main/spec/luminary-identity-pal-spec.md)
 
 ## 目标
 
@@ -9,7 +9,7 @@
 
 ## 当前完成度（2026-06）
 
-| 能力 | DataLuminary | VibeEdu | VibeAgent | VistaRemote | IoT |
+| 能力 | DataLuminary | BlockyEdu | DoerFlow | VistaCast | SyncroBrain |
 |------|-------------|---------|-----------|-------------|-----|
 | 前端 OIDC PKCE | DataView ✅ | edu/code ✅ | Web 📋 | Admin ✅ | console ✅ |
 | 后端 JWKS | DataTalk ✅ | server ✅ | Admin only ⚠️ | Admin ✅ | gateway ✅ |
@@ -22,8 +22,8 @@
 ### P0 — 稳定现有 OIDC（1～2 迭代）
 
 1. **依赖收敛**：五后端统一 `@luminaryworks/auth-core@^0.2.0` + CI 可安装（已完成 LW-S4 主体）。
-2. **端到端冒烟**：一个 Logto 用户登录 DataView、edu-app、VistaRemote Admin、iot-console，验证同一 `sub`。
-3. **VibeAgent 加固**：`IDP_ISSUER` 未配置时禁止 admin 路由裸奔；补齐 `repos/web` OIDC。
+2. **端到端冒烟**：一个 Logto 用户登录 DataView、edu-app、VistaCast Admin、iot-console，验证同一 `sub`。
+3. **DoerFlow 加固**：`IDP_ISSUER` 未配置时禁止 admin 路由裸奔；补齐 `repos/web` OIDC。
 
 ### P1 — 用户与权限统一（2～3 迭代）
 
@@ -33,9 +33,9 @@
 
 ### P2 — 产品补全（并行）
 
-7. **VibeAgent**：`user_wallet` 表链接 `sub` ↔ 钱包；全局 API Guard。
-8. **VistaRemote**：决策终端用户是否走 Logto；房间权限与 IdP 关系文档化。
-9. **LuminaryIoTChain M2**：租户隔离、`iot.device:*` 权限、按 owner 过滤设备列表。
+7. **DoerFlow**：`user_wallet` 表链接 `sub` ↔ 钱包；全局 API Guard。
+8. **VistaCast**：决策终端用户是否走 Logto；房间权限与 IdP 关系文档化。
+9. **SyncroBrain M2**：租户隔离、`iot.device:*` 权限、按 owner 过滤设备列表。
 
 ### P3 — 企业与平台
 
@@ -56,4 +56,4 @@
 |----|------|
 | [LuminaryWorks/identity](https://github.com/LuminaryWorks/identity) | Logto 编排与应用注册 |
 | [LuminaryWorks/shared](https://github.com/LuminaryWorks/shared) | auth-core / auth-react / pal |
-| [DataLuminary-Platform/spec](https://github.com/DataLuminary/DataLuminary-Platform/tree/main/spec) | 生态级身份规格 |
+| [dataluminary/DataLuminary-Platform/spec](https://github.com/dataluminary/DataLuminary-Platform/tree/main/spec) | 生态级身份规格 |

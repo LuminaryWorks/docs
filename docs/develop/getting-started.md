@@ -1,6 +1,6 @@
 # 快速开始
 
-LuminaryWorks 是编排型 MetaRepo，子仓为独立 Git。本地推荐目录：
+LuminaryWorks（启明工坊）是编排型 MetaRepo，子仓为独立 Git。本地推荐目录（Phase C）：
 
 ```text
 D:\www\
@@ -8,11 +8,12 @@ D:\www\
 │   ├── docs\                   # 本文档站
 │   ├── identity\               # 统一登录授权服务
 │   └── shared\                 # @luminaryworks/* 共享库
-├── DataLuminary\DataLuminary-Platform\
-├── BlockyEdu\VibeEdu\
-├── AgentSkillMesh\VibeAgent\
-├── VistaRemote\
-└── LuminaryIoTChain\
+├── dataluminary\               # DataLuminary · 数据明鉴
+├── blockyedu\                  # BlockyEdu · 智码工坊
+├── doerflow\                   # DoerFlow · 智工网
+├── vistacast\                  # VistaCast · 视界云遥（规划 spec）
+├── vistaremote\                # VistaRemote · 视界远程
+└── syncrobrain\                # SyncroBrain · 万物智脑
 ```
 
 ## 1. 拉起统一登录
@@ -53,8 +54,9 @@ pnpm bootstrap          # 起 identity + 构建 shared
 | Identity OIDC / Admin | 3001 / 3002 |
 | DataView / DataTalk | 3003 / 8084 |
 | VibeEdu edu-app | 18082 |
-| VibeAgent web / api | 5174 / 13008 |
+| DoerFlow web / api | 5174 / 13008 |
 | VistaRemote admin | 5175 |
+| VistaCast admin（规划） | 13120 |
 | iot-console / gateway | 5180 / 13100 |
 | EMQX / Mosquitto | 1883 |
 | DataTalk PostgreSQL | 5433 |
@@ -62,7 +64,7 @@ pnpm bootstrap          # 起 identity + 构建 shared
 
 ## 延伸阅读
 
-- [新人上手（五产品）](./onboarding)
+- [新人上手（六产品）](./onboarding)
 - [数据存储与 PostgreSQL](./datastore)
 - [登录/权限路线图](./identity-roadmap)
 - [统一登录接入](./unified-login)
