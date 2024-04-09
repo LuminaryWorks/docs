@@ -1,6 +1,6 @@
 # DoerFlow · 智工网
 
-> 角色 **赚** · 组织 [doerflow](https://github.com/doerflow) · MetaRepo [VibeAgent](https://github.com/doerflow/VibeAgent)
+> 角色 **赚** · 组织 [doerflow](https://github.com/doerflow) · 官网 [doerflow.dev](https://doerflow.dev) · MetaRepo [VibeAgent](https://github.com/doerflow/VibeAgent)
 
 以太坊上的 AI Agent / Skill 去中心化市场：发布、订阅、托管结算、风控与声誉。可单独服务 Web3 + AI 社区，也可作为生态「变现层」。
 
@@ -29,12 +29,13 @@
 
 ## 典型集成
 
-| 兄弟产品 | 场景 |
-|----------|------|
-| SyncroBrain | 设备 Agent 上架、遥测触发推理 |
-| DataLuminary | 交易与运行数据可视化 |
-| BlockyEdu | 合约 / Agent / Skill 开发课程 |
-| VistaCast | Worker 端远程调试与录制审计 |
+| 兄弟产品 | 官网 | 场景 |
+|----------|------|------|
+| [SyncroBrain](https://syncrobrain.com) | [syncrobrain.com](https://syncrobrain.com) | 设备 Agent 上架、遥测触发推理 |
+| [DataLuminary](https://dataluminary.dev) | [dataluminary.dev](https://dataluminary.dev) | 交易与运行数据可视化 |
+| [BlockyEdu](https://blockyedu.com) | [blockyedu.com](https://blockyedu.com) | 合约 / Agent / Skill 开发课程 |
+| [VistaRemote](https://remote.vistacast.dev) | [remote.vistacast.dev](https://remote.vistacast.dev) | Worker 端远程调试与录制审计 |
+| [VistaCast](https://vistacast.dev) | [vistacast.dev](https://vistacast.dev) | 视觉事件触发 Skill（规划） |
 
 ## 快速开始
 

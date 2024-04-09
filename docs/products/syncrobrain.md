@@ -1,8 +1,8 @@
 # SyncroBrain · 万物智脑
 
-> 角色 **连** · 组织 [syncrobrain](https://github.com/syncrobrain) · MetaRepo [LuminaryIoTChain](https://github.com/syncrobrain/LuminaryIoTChain)
+> 角色 **连** · 组织 [syncrobrain](https://github.com/syncrobrain) · 官网 [syncrobrain.com](https://syncrobrain.com) · MetaRepo [LuminaryIoTChain](https://github.com/syncrobrain/LuminaryIoTChain)
 
-开源、AI 驱动的 IoT PaaS：参考涂鸦类生态，以更低成本为硬件厂商提供设备接入、多租户控制台、规则引擎与 App 能力。Apache/MIT 栈，可私有化部署。
+开源、AI 驱动的 IoT PaaS：参考涂鸦类生态，以更低成本为硬件厂商提供设备接入、多租户控制台、规则引擎与 App 能力。Polyform-NC 核心栈，可私有化部署。
 
 ## 核心能力
 
@@ -26,7 +26,7 @@
 ## 与闭源 IoT 云差异
 
 - **开源可私有化**，许可与扩容成本更低
-- **不止设备管理**：AI 推理（DoerFlow）+ 专业大屏（DataLuminary）+ 远程运维（VistaCast）
+- **不止设备管理**：AI 推理（[DoerFlow](https://doerflow.dev)）+ 专业大屏（[DataLuminary](https://dataluminary.dev)）+ 远程运维（[VistaRemote](https://remote.vistacast.dev)）+ 视觉 AI（[VistaCast](https://vistacast.dev)）
 - **BlockyEdu AI 辅助接入**，缩短固件与 MQTT 联调周期
 - **标准协议**：MQTT、REST、OIDC，无厂商锁定
 
@@ -37,7 +37,7 @@
                               │
                               ├──► DataLuminary 大屏
                               ├──► DoerFlow 推理
-                              └──► VistaCast 远程维护
+                              └──► VistaRemote 远程维护
 ```
 
 ## 数据存储

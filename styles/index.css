@@ -4,6 +4,10 @@
   --rp-c-brand-dark: #0958d9;
   --rp-c-brand-light: #4593ff;
   --rp-home-hero-name-color: transparent;
+  --lw-home-surface: rgba(255, 255, 255, 0.7);
+  --lw-home-surface-strong: rgba(255, 255, 255, 0.88);
+  --lw-home-border: rgba(22, 119, 255, 0.12);
+  --lw-home-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 }
 
 /* Hero 渐变标题 */
@@ -25,7 +29,14 @@
 .rspress-home-hero {
   position: relative;
   overflow: hidden;
+  padding-bottom: 2rem;
 }
+
+.rspress-home-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
 .rspress-home-hero::before {
   content: "";
   position: absolute;
@@ -39,10 +50,23 @@
   z-index: 0;
 }
 
+.rspress-home-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -6rem;
+  height: 12rem;
+  background: linear-gradient(180deg, rgba(22, 119, 255, 0) 0%, rgba(24, 160, 251, 0.08) 100%);
+  filter: blur(16px);
+  pointer-events: none;
+}
+
 /* 能力卡片 hover 提升 */
 .rspress-home-feature-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  border: 1px solid var(--rp-c-divider);
+  border: 1px solid var(--lw-home-border);
+  background: var(--lw-home-surface);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
 }
 .rspress-home-feature-card:hover {
   transform: translateY(-4px);
@@ -54,4 +78,213 @@
 .rspress-home-hero-action.brand {
   background: linear-gradient(120deg, #1677ff, #18a0fb);
   border: none;
+}
+
+.rspress-home-hero-action.alt {
+  border-color: rgba(22, 119, 255, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.lw-home-sections {
+  overflow: hidden;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.lw-home-heading {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.lw-home-closing {
+  margin: 0;
+  color: var(--rp-c-text-2);
+  line-height: 1.8;
+}
+
+.lw-home-closing strong {
+  color: var(--rp-c-text-1);
+}
+
+.lw-home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 2.5rem;
+}
+
+.lw-home-stat,
+.lw-home-flow-card,
+.lw-home-product-card,
+.lw-home-why-card {
+  border: 1px solid var(--lw-home-border);
+  background: var(--lw-home-surface);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--lw-home-shadow);
+}
+
+.lw-home-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.lw-home-stat strong {
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--rp-c-brand);
+}
+
+.lw-home-stat span {
+  color: var(--rp-c-text-2);
+  font-size: 0.95rem;
+}
+
+.lw-home-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: stretch;
+  margin: 0 0 2.5rem;
+}
+
+.lw-home-flow-group {
+  display: flex;
+  flex: 1 1 11rem;
+  align-items: stretch;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.lw-home-flow-card {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 1.15rem;
+  border-radius: 22px;
+}
+
+.lw-home-flow-card strong,
+.lw-home-product-card strong,
+.lw-home-why-card strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.lw-home-flow-card p,
+.lw-home-product-card p,
+.lw-home-why-card p {
+  margin: 0;
+  color: var(--rp-c-text-2);
+  line-height: 1.65;
+}
+
+.lw-home-flow-kicker,
+.lw-home-product-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.1rem;
+  height: 2.1rem;
+  padding: 0 0.7rem;
+  margin-bottom: 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(120deg, rgba(22, 119, 255, 0.14), rgba(33, 212, 168, 0.18));
+  color: var(--rp-c-brand-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.lw-home-flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rp-c-brand);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.lw-home-grid,
+.lw-home-why {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2.5rem;
+}
+
+.lw-home-product-card,
+.lw-home-why-card {
+  display: block;
+  padding: 1.2rem;
+  border-radius: 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.lw-home-product-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.lw-home-product-card:hover,
+.lw-home-why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(22, 119, 255, 0.3);
+  box-shadow: 0 18px 48px rgba(22, 119, 255, 0.12);
+}
+
+.lw-home-product-card strong {
+  color: var(--rp-c-text-1);
+}
+
+@media (max-width: 1200px) {
+  .lw-home-flow {
+    flex-direction: column;
+  }
+
+  .lw-home-flow-group {
+    flex-direction: column;
+  }
+
+  .lw-home-flow-arrow {
+    transform: rotate(90deg);
+    min-height: 2rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .lw-home-stats,
+  .lw-home-grid,
+  .lw-home-why {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .lw-home-stats,
+  .lw-home-grid,
+  .lw-home-why {
+    grid-template-columns: 1fr;
+  }
+
+  .rspress-home-hero {
+    padding-bottom: 1rem;
+  }
+}
+
+.dark {
+  --lw-home-surface: rgba(15, 23, 42, 0.66);
+  --lw-home-surface-strong: rgba(15, 23, 42, 0.88);
+  --lw-home-border: rgba(96, 165, 250, 0.18);
+  --lw-home-shadow: 0 20px 60px rgba(2, 6, 23, 0.34);
+}
+
+.dark .rspress-home-hero-action.alt {
+  background: rgba(15, 23, 42, 0.72);
 }

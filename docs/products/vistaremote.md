@@ -1,6 +1,6 @@
 # VistaRemote · 视界远程
 
-> 角色 **控** · 组织 [VistaRemote](https://github.com/VistaRemote) · MetaRepo [vibeCode](https://github.com/VistaRemote/vibeCode)
+> 角色 **控** · 组织 [VistaRemote](https://github.com/VistaRemote) · 官网 [remote.vistacast.dev](https://remote.vistacast.dev) · MetaRepo [vibeCode](https://github.com/VistaRemote/vibeCode)
 
 WebRTC 实时远程桌面控制与自托管 AI 录制洞察。适配工控机、边缘网关、IT 桌面、客服远程协助等场景，可单独交付私有化运维产品。
 
