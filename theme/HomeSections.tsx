@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "@rspress/theme-default";
 
 const products = [
@@ -6,36 +7,42 @@ const products = [
     name: "BlockyEdu · 智码工坊",
     description: "面向 AI 编程教育与 IoT 实验教学。",
     href: "/products/blockyedu",
+    logo: "/brand/blockyedu-logo.svg",
   },
   {
     badge: "连",
     name: "SyncroBrain · 万物智脑",
     description: "连接设备、协议与云边协同的 IoT PaaS。",
     href: "/products/syncrobrain",
+    logo: "/brand/syncrobrain-logo.svg",
   },
   {
     badge: "看",
     name: "DataLuminary · 数据明鉴",
     description: "数据洞察、可视化与 AI 驱动分析。",
     href: "/products/dataluminary",
+    logo: "/brand/dataluminary-logo.svg",
   },
   {
     badge: "视",
     name: "VistaCast · 视界云遥",
     description: "兼容 ONVIF/RTSP 的 AI 摄像头云监控能力。",
     href: "/products/vistacast",
+    logo: "/brand/vistacast-logo.svg",
   },
   {
     badge: "控",
     name: "VistaRemote · 视界远程",
     description: "WebRTC 远程桌面与录制洞察，面向私有化运维。",
     href: "/products/vistaremote",
+    logo: "/brand/vistaremote-logo.svg",
   },
   {
     badge: "赚",
     name: "DoerFlow · 智工网",
-    description: "让 Agent、技能与算力走向链上协作与交易。",
+    description: "让 Agent 调用 Agent、云资源与人类服务，并完成低成本结算。",
     href: "/products/doerflow",
+    logo: "/brand/doerflow-logo.svg",
   },
 ] as const;
 
@@ -44,31 +51,43 @@ const flow = [
     badge: "学",
     href: "https://blockyedu.com",
     name: "BlockyEdu",
-    description: "AI 编程教育与 IoT 实验平台，降低工程与 AI 入门门槛。",
+    description: "AI 编程教育与 IoT 实训",
+    logo: "/brand/blockyedu-logo.svg",
   },
   {
     badge: "连",
     href: "https://syncrobrain.com",
     name: "SyncroBrain",
-    description: "让设备、网关与协议先接起来，构建 AI 驱动的 IoT PaaS 底座。",
+    description: "开源 IoT PaaS 底座",
+    logo: "/brand/syncrobrain-logo.svg",
   },
   {
     badge: "看",
     href: "https://dataluminary.dev",
     name: "DataLuminary",
-    description: "把遥测、业务与推理结果转成可视化洞察与可决策的数据资产。",
+    description: "数据洞察与可视化大屏",
+    logo: "/brand/dataluminary-logo.svg",
   },
   {
-    badge: "视 / 控",
+    badge: "视",
     href: "https://vistacast.dev",
-    name: "VistaCast / VistaRemote",
-    description: "覆盖 AI 视频监控与 WebRTC 远程桌面两条视觉产品线。",
+    name: "VistaCast",
+    description: "AI 摄像头云监控",
+    logo: "/brand/vistacast-logo.svg",
+  },
+  {
+    badge: "控",
+    href: "https://remote.vistacast.dev",
+    name: "VistaRemote",
+    description: "WebRTC 远程桌面",
+    logo: "/brand/vistaremote-logo.svg",
   },
   {
     badge: "赚",
     href: "https://doerflow.dev",
     name: "DoerFlow",
-    description: "把 AI Agent、设备算力与技能服务推向协作、交易与分成网络。",
+    description: "Agent / Skill 低成本调用与交易",
+    logo: "/brand/doerflow-logo.svg",
   },
 ] as const;
 
@@ -95,6 +114,30 @@ const why = [
   },
 ] as const;
 
+function ExternalLink({
+  href,
+  className,
+  title,
+  children,
+}: {
+  href: string;
+  className?: string;
+  title?: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      className={className}
+      href={href}
+      title={title}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  );
+}
+
 export function HomeSections() {
   return (
     <div className="lw-home-sections">
@@ -120,14 +163,26 @@ export function HomeSections() {
       <h2 className="lw-home-heading">从学习到产业落地</h2>
       <div className="lw-home-flow">
         {flow.map((item, index) => (
-          <a className="lw-home-flow-group" key={item.name} href={item.href} title="跳转到官网，查看详情">
+          <ExternalLink
+            className="lw-home-flow-group"
+            key={item.name}
+            href={item.href}
+            title="跳转到官网，查看详情"
+          >
             {index > 0 ? <div className="lw-home-flow-arrow">→</div> : null}
             <div className="lw-home-flow-card">
-              <span className="lw-home-flow-kicker">{item.badge}</span>
+              <div className="lw-home-logo-row">
+                <img
+                  className="lw-home-logo"
+                  src={item.logo}
+                  alt={`${item.name} logo`}
+                />
+                <span className="lw-home-flow-kicker">{item.badge}</span>
+              </div>
               <strong>{item.name}</strong>
               <p>{item.description}</p>
             </div>
-          </a>
+          </ExternalLink>
         ))}
       </div>
 
@@ -139,7 +194,14 @@ export function HomeSections() {
             className="lw-home-product-card"
             href={product.href}
           >
-            <span className="lw-home-product-badge">{product.badge}</span>
+            <div className="lw-home-logo-row">
+              <img
+                className="lw-home-logo"
+                src={product.logo}
+                alt={`${product.name} logo`}
+              />
+              <span className="lw-home-product-badge">{product.badge}</span>
+            </div>
             <strong>{product.name}</strong>
             <p>{product.description}</p>
           </Link>

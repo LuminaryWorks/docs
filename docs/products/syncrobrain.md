@@ -1,5 +1,8 @@
 # SyncroBrain · 万物智脑
 
+![SyncroBrain](/brand/syncrobrain-logo.svg)
+
+
 > 角色 **连** · 组织 [syncrobrain](https://github.com/syncrobrain) · 官网 [syncrobrain.com](https://syncrobrain.com) · MetaRepo [LuminaryIoTChain](https://github.com/syncrobrain/LuminaryIoTChain)
 
 开源、AI 驱动的 IoT PaaS：参考涂鸦类生态，以更低成本为硬件厂商提供设备接入、多租户控制台、规则引擎与 App 能力。Polyform-NC 核心栈，可私有化部署。
@@ -12,7 +15,7 @@
 | **规则引擎** | ThingsBoard CE 规则链 + 自定义 iot-gateway 编排 |
 | **控制台** | iot-console-web 设备管理、遥测、告警 |
 | **生态网关** | NestJS iot-gateway：JWT 验签、PAL、与 DataTalk / Agent 对接 |
-| **终端 App** | Flutter / RN 模板（规划中） |
+| **终端 App** | Flutter / React Native 终端模板，覆盖监控与控制场景 |
 
 ## 四层架构
 
@@ -43,13 +46,9 @@
 ## 数据存储
 
 - **OLTP**：PostgreSQL（`iot-gateway`，与 Logto / DataTalk 同栈）
-- **时序 / 分析**：ClickHouse 增量引入（IoT-M5）
+- **时序 / 分析**：ClickHouse 承载高吞吐遥测与分析查询
 
 选型说明：[数据存储 / PostgreSQL](/develop/datastore)
-
-## 仓库模型
-
-对齐 BlockyEdu：**公开 docs**、**私有** MetaRepo + gateway + console — [repository-split 计划](https://github.com/syncrobrain/LuminaryIoTChain/blob/master/plan/repository-split.md)
 
 ## 快速开始
 
@@ -59,4 +58,4 @@ cd LuminaryIoTChain
 # 详见 ONBOARDING.md
 ```
 
-[新人上手（IoT）](https://github.com/syncrobrain/LuminaryIoTChain/blob/main/ONBOARDING.md) · [生态新人指南](/develop/onboarding) · [统一登录](/develop/unified-login)
+更多信息：[SyncroBrain ONBOARDING](https://github.com/syncrobrain/LuminaryIoTChain/blob/main/ONBOARDING.md) · [统一登录](/develop/unified-login)

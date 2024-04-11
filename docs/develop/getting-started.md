@@ -1,53 +1,46 @@
-# 快速开始
+# 技术接入概览
 
-LuminaryWorks（启明工坊）是编排型 MetaRepo，子仓为独立 Git。本地推荐目录（Phase C）：
+LuminaryWorks 以编排型 MetaRepo 管理生态叙事、统一身份与共享库；六个产品各自拥有独立仓库与交付边界，可单独私有化部署，也可按需组合。
+
+推荐把生态仓放在同一工作区父目录下：
 
 ```text
-D:\www\
-├── LuminaryWorks\              # 本仓（叙事 + 标准 + 脚本）
-│   ├── docs\                   # 本文档站
-│   ├── identity\               # 统一登录授权服务
-│   └── shared\                 # @luminaryworks/* 共享库
-├── dataluminary\               # DataLuminary · 数据明鉴
-├── blockyedu\                  # BlockyEdu · 智码工坊
-├── doerflow\                   # DoerFlow · 智工网
-├── vistacast\                  # VistaCast · 视界云遥（规划 spec）
-├── vistaremote\                # VistaRemote · 视界远程
-└── syncrobrain\                # SyncroBrain · 万物智脑
+<workspace>/
+├── LuminaryWorks/              # 生态门户、身份、共享库
+│   ├── docs/
+│   ├── identity/
+│   └── shared/
+├── dataluminary/               # DataLuminary · 数据明鉴
+├── blockyedu/                  # BlockyEdu · 智码工坊
+├── doerflow/                   # DoerFlow · 智工网
+├── vistacast/                  # VistaCast · 视界云遥
+├── vistaremote/                # VistaRemote · 视界远程
+└── syncrobrain/                # SyncroBrain · 万物智脑
 ```
 
-## 1. 拉起统一登录
+## 1. 统一登录
 
 ```bash
 cd LuminaryWorks/identity
 ./bootstrap.sh          # Windows: ./bootstrap.ps1
 ```
 
-OIDC `http://localhost:3001/oidc` · Admin `http://localhost:3002`。注册应用见 [统一登录接入](./unified-login)。
+中央 OIDC 为各产品提供同一用户主体。详见 [统一登录接入](./unified-login)。
 
-## 2. 构建共享库
+## 2. 共享组件
 
 ```bash
 cd LuminaryWorks/shared
 pnpm install && pnpm build
 ```
 
-产出 `@luminaryworks/auth-core`、`@luminaryworks/auth-react`、`@luminaryworks/pal`。
+产出 `@luminaryworks/auth-core`、`@luminaryworks/auth-react`、`@luminaryworks/pal`，供各产品复用认证与权限能力。
 
-## 3. 一键编排（meta 仓）
+## 3. 启动产品
 
-```bash
-cd LuminaryWorks
-pnpm bootstrap          # 起 identity + 构建 shared
-```
+进入对应产品仓，按其 README / ONBOARDING 配置环境变量与 `CLIENT_ID` 后启动。每个产品都可独立运行，不强制绑定完整生态。
 
-## 4. 启动某个产品
-
-进入对应产品仓，按其 **ONBOARDING.md** 或 README 配置 `.env`（填入 identity 输出的 `CLIENT_ID`）后启动。
-
-详细矩阵（MetaRepo vs 子仓）：[新人上手指南](./onboarding)。
-
-## 本地端口速查
+## 参考端口
 
 | 服务 | 端口 |
 |------|------|
@@ -56,15 +49,12 @@ pnpm bootstrap          # 起 identity + 构建 shared
 | VibeEdu edu-app | 18082 |
 | DoerFlow web / api | 5174 / 13008 |
 | VistaRemote admin | 5175 |
-| VistaCast admin（规划） | 13120 |
+| VistaCast admin | 13120 |
 | iot-console / gateway | 5180 / 13100 |
-| EMQX / Mosquitto | 1883 |
-| DataTalk PostgreSQL | 5433 |
-| IoT PostgreSQL | 5434 |
 
 ## 延伸阅读
 
-- [新人上手（六产品）](./onboarding)
-- [数据存储与 PostgreSQL](./datastore)
-- [登录/权限路线图](./identity-roadmap)
 - [统一登录接入](./unified-login)
+- [数据存储与 PostgreSQL](./datastore)
+- [共享库 @luminaryworks/*](./shared-packages)
+- [总体架构](/guide/architecture)

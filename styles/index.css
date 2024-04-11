@@ -149,26 +149,37 @@
 }
 
 .lw-home-flow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.35rem;
   align-items: stretch;
   margin: 0 0 2.5rem;
 }
 
 .lw-home-flow-group {
-  display: flex;
-  flex: 1 1 11rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: stretch;
-  gap: 0.8rem;
+  gap: 0.25rem;
   min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.lw-home-flow-group:first-child {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .lw-home-flow-card {
-  flex: 1 1 auto;
   min-width: 0;
-  padding: 1.15rem;
-  border-radius: 22px;
+  padding: 0.85rem 0.75rem;
+  border-radius: 18px;
+}
+
+.lw-home-flow-card strong {
+  overflow-wrap: anywhere;
+  font-size: 0.92rem;
+  margin-bottom: 0.35rem;
 }
 
 .lw-home-flow-card strong,
@@ -178,7 +189,13 @@
   margin-bottom: 0.5rem;
 }
 
-.lw-home-flow-card p,
+.lw-home-flow-card p {
+  margin: 0;
+  color: var(--rp-c-text-2);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
 .lw-home-product-card p,
 .lw-home-why-card p {
   margin: 0;
@@ -186,19 +203,39 @@
   line-height: 1.65;
 }
 
+.lw-home-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.55rem;
+}
+
+.lw-home-logo {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 0.55rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.dark .lw-home-logo {
+  background: rgba(15, 23, 42, 0.45);
+}
+
 .lw-home-flow-kicker,
 .lw-home-product-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 2.1rem;
-  height: 2.1rem;
-  padding: 0 0.7rem;
-  margin-bottom: 0.9rem;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  padding: 0 0.5rem;
+  margin-bottom: 0;
   border-radius: 999px;
   background: linear-gradient(120deg, rgba(22, 119, 255, 0.14), rgba(33, 212, 168, 0.18));
   color: var(--rp-c-brand-dark);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
@@ -206,9 +243,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 0.7rem;
   color: var(--rp-c-brand);
-  font-size: 1.5rem;
+  font-size: 0.95rem;
   font-weight: 700;
+  opacity: 0.75;
+}
+
+.rspress-doc .lw-home-grid {
+  margin-top: 1.25rem;
+}
+
+.rspress-doc .lw-home-product-card .lw-home-logo {
+  width: 2.25rem;
+  height: 2.25rem;
 }
 
 .lw-home-grid,
@@ -245,16 +293,22 @@
 
 @media (max-width: 1200px) {
   .lw-home-flow {
-    flex-direction: column;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
   .lw-home-flow-group {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .lw-home-flow-arrow {
-    transform: rotate(90deg);
-    min-height: 2rem;
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .lw-home-flow {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -287,4 +341,19 @@
 
 .dark .rspress-home-hero-action.alt {
   background: rgba(15, 23, 42, 0.72);
+}
+
+.rspress-doc img[src^="/brand/"] {
+  display: block;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0.25rem 0 1.25rem;
+  border-radius: 1rem;
+  object-fit: contain;
+}
+
+.rspress-doc .lw-home-product-card img[src^="/brand/"] {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
 }

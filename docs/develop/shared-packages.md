@@ -1,6 +1,6 @@
 # 共享库 @luminaryworks/*
 
-收敛在 [`LuminaryWorks/shared`](https://github.com/LuminaryWorks/shared) 的 pnpm 工作区。
+收敛在 [`LuminaryWorks/shared`](https://github.com/LuminaryWorks/shared) 的 pnpm 工作区，为六产品提供统一认证、权限与工程基线。
 
 ## 包清单
 
@@ -11,7 +11,7 @@
 | `@luminaryworks/pal` | 权限抽象层（native / oidc-claims） | NestJS 后端 |
 | `@luminaryworks/tooling` | Biome preset、tsconfig base | workspace 内部 |
 
-## GitHub Packages（推荐）
+## 安装（GitHub Packages）
 
 ```ini
 # .npmrc（PAT 需 read:packages）
@@ -25,12 +25,12 @@ pnpm add @luminaryworks/auth-core@^0.2.0
 
 发布说明：[shared/PUBLISH.md](https://github.com/LuminaryWorks/shared/blob/master/PUBLISH.md)
 
-## 本地开发（file: 回退）
+## 本地联调（可选）
 
-未配置 registry 或离线时，消费方 `package.json`：
+未配置 registry 或离线时，可在消费方 `package.json` 用相对路径指向 sibling 布局下的 `shared` 包：
 
 ```jsonc
-"@luminaryworks/auth-core": "file:../../../LuminaryWorks/shared/packages/auth-core"
+"@luminaryworks/auth-core": "file:../LuminaryWorks/shared/packages/auth-core"
 ```
 
 安装前：
@@ -38,14 +38,3 @@ pnpm add @luminaryworks/auth-core@^0.2.0
 ```bash
 cd LuminaryWorks/shared && pnpm build
 ```
-
-## 迁移阶段
-
-| 阶段 | 状态 |
-|------|------|
-| LW-S1 迁入 shared | ✅ |
-| LW-S2 五消费方 file: → shared | ✅ |
-| LW-S3 删除 Platform `packages/` | ✅ |
-| LW-S4 GitHub Packages 发布 | CI workflow + `^0.2.0` |
-
-详见 [MIGRATION.md](https://github.com/LuminaryWorks/shared/blob/master/MIGRATION.md)。
