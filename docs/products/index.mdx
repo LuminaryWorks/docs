@@ -1,0 +1,29 @@
+# 六大产品概览
+
+import { ProductOverview } from "../../theme/ProductOverview";
+
+[LuminaryWorks（启明工坊）](https://luminaryworks.dev) 由六个**可独立部署、可单独商业化**的开源产品组成，覆盖教育、物联、数据、视觉监控、远程运维与链上协作全链路。
+
+<ProductOverview />
+
+## VistaCast vs VistaRemote
+
+两条独立视觉产品线，分别服务自动感知与人工远程触达：
+
+| | VistaCast | VistaRemote |
+|---|-----------|-------------|
+| 输入 | ONVIF / RTSP 固定摄像头 | 远程桌面画面与控制流 |
+| 价值 | AI 自动告警、客流与安防分析 | 低延迟远程操作、录制与审计 |
+| 官网 | [vistacast.dev](https://vistacast.dev) | [remote.vistacast.dev](https://remote.vistacast.dev) |
+| 远期 | 跨摄像头 Re-ID、生态大屏与事件编排 | AI 会话摘要、企业级运维中台 |
+
+## 共享基础设施
+
+| 能力 | 说明 |
+|------|------|
+| 统一身份 | 中央 Logto OIDC，六产品同一用户主体 |
+| 共享组件 | `@luminaryworks/*` 认证、权限与工程基线 |
+| 标准协议 | OIDC / MQTT / REST / WebRTC / ONVIF |
+| 宣传门户 | 本站 [luminaryworks.dev](https://luminaryworks.dev) |
+
+每个产品都能单独商业化；通过统一登录与标准协议可按需组合，形成从学习到变现的完整闭环。
