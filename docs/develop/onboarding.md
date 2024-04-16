@@ -22,9 +22,12 @@
 
 | 能力 | 入口 | 说明 |
 |------|------|------|
-| 统一登录 | `LuminaryWorks/identity` | 中央 Logto OIDC |
-| 共享组件 | `LuminaryWorks/shared` | 认证、权限与工程基线 |
+| 统一登录 | `LuminaryWorks/identity` | 中央 Logto OIDC；登录 UI 默认 Experience Headless |
+| 资源权限 | 各产品 Casbin | AuthZ 与 Logto 解耦，见 IAM 规格 |
+| 共享组件 | `LuminaryWorks/shared` | 认证、权限、通知与工程基线 |
+| 通知（Email） | `@luminaryworks/notification` | 平台 NotificationModule；见 [通知模块](./notification) |
 | 应用注册 | `identity` 脚本 | 输出各产品 `CLIENT_ID` |
+| Cursor 规范 | `.cursor/skills/product-auth-implementation` | 产品登录/权限落地提示词 |
 
 ## 六产品入口
 
@@ -52,3 +55,5 @@
 | VistaCast | [products/vistacast](/products/vistacast) |
 | VistaRemote | [products/vistaremote](/products/vistaremote) |
 | 统一登录 | [develop/unified-login](/develop/unified-login) |
+| 通知模块 | [develop/notification](/develop/notification) |
+| 产品 Auth Cursor 提示词 | [develop/product-auth-prompt](/develop/product-auth-prompt) |

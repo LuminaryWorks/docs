@@ -41,11 +41,16 @@ AI 正在重塑软件价值链：从「写代码」到「编排 Agent」，从�
 
 ## 统一体验
 
-- **一次登录**：中央 [Logto OIDC](/develop/unified-login)，各产品同一用户主体
-- **权限统一**：`resource:action` 抽象（[PAL](https://github.com/LuminaryWorks/shared)）
-- **数据隔离**：无跨产品外键绑定，仅通过 JWT / API / 事件关联
-- **可替换协议**：OIDC、MQTT、REST、WebRTC、ONVIF，降低锁定风险
+- **默认统一账号**：经 [Auth Gateway](/develop/auth-gateway) → IdP（中心 Logto 或企业 SSO）；各产品同一用户主体（`sub`）
+- **登录页**：产品品牌自建；主 CTA 为统一账号 / 企业 SSO，本地账密仅开发回退
+- **权限解耦**：身份归 IdP；商业权益归 Entitlement；资源 ACL 归各产品 Casbin（[PAL](https://github.com/LuminaryWorks/shared)）
+- **数据隔离**：无跨产品外键；仅 JWT / API / 事件关联；本地 `user_id ↔ sub` 便于业务剥离
+- **可替换协议**：OIDC、MQTT、REST、WebRTC、ONVIF；换 IdP 不改产品代码
+
+详见 [统一登录](/develop/unified-login)。
 
 ## 开源与商业
 
 生态核心产品采用 **[Polyform Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/)**（Polyform-NC）：允许非商业使用、学习与私有化部署；商业授权可按产品独立洽谈，形成清晰的开源获客 + 商业变现路径。
+
+DoerFlow 的商业层与协议层分开：平台账号采用 Logto，非托管钱包继续由用户本地签名；只提供 Pro、Ultra、Enterprise，不提供免费 Trial。平台套餐覆盖托管 API/配额，Gas、Escrow 与协议费仍按协议规则结算。客户端明确区分 401 登录、402 套餐/配额与 403 资源权限。

@@ -15,14 +15,15 @@ AI 数据洞察平台：空间化数据集管理、DataTalk 可视化大屏、�
 | **DataView** | 前端可视化编辑器，拖拽式大屏搭建与主题定制 |
 | **数据源插件** | 支持 PostgreSQL、MySQL（外部库）、Excel 导入等；`kind` 与 TypeORM 驱动对齐 |
 | **权限 (PAL)** | `space` / `dashboard` / `dataset` / `datasource` 等资源级 `resource:action` |
-| **统一登录** | Logto OIDC + 本地账号双模式；与 [LuminaryWorks/identity](https://github.com/LuminaryWorks/identity) 对齐 |
+| **统一登录** | **默认** LuminaryWorks 统一账号（OIDC）；经 Auth Gateway，可接企业 SSO；DataView 主 CTA 为统一登录，本地账密仅开发回退 |
+| **订阅推送邮件** | DataTalk 报表订阅经 `@luminaryworks/notification` 投递（见 [通知模块](/develop/notification)） |
 
 ## 技术栈
 
 - **OLTP**：PostgreSQL（平台主库，TypeORM migrations）
 - **后端**：NestJS + Fastify + TypeORM
 - **前端**：React + 自研图表引擎
-- **共享库**：`@luminaryworks/auth-core`、`@luminaryworks/pal`（[LuminaryWorks/shared](https://github.com/LuminaryWorks/shared)）
+- **共享库**：`@luminaryworks/auth-core`、`@luminaryworks/pal`、`@luminaryworks/notification`（[LuminaryWorks/shared](https://github.com/LuminaryWorks/shared)）
 
 为何平台 OLTP 用 PostgreSQL（而非 MySQL）：见 [数据存储策略](/develop/datastore)。
 
@@ -52,4 +53,4 @@ pnpm dev:talk       # DataTalk API
 pnpm dev:view       # DataView 前端
 ```
 
-更多信息：[DataLuminary ONBOARDING](https://github.com/dataluminary/DataLuminary-Platform/blob/main/ONBOARDING.md) · [统一登录接入](/develop/unified-login)
+更多信息：[DataLuminary ONBOARDING](https://github.com/dataluminary/DataLuminary-Platform/blob/main/ONBOARDING.md) · [统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification)

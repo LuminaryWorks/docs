@@ -21,11 +21,15 @@ LuminaryWorks 以编排型 MetaRepo 管理生态叙事、统一身份与共享�
 ## 1. 统一登录
 
 ```bash
-cd LuminaryWorks/identity
-./bootstrap.sh          # Windows: ./bootstrap.ps1
+cd LuminaryWorks
+pnpm id:up
+# 可选（生产推荐形态）
+pnpm auth:gateway   # http://localhost:3010/oidc
 ```
 
-中央 OIDC 为各产品提供同一用户主体。详见 [统一登录接入](./unified-login)。
+中央 OIDC 为各产品提供同一用户主体。产品登录页默认走统一账号；私有化改 Gateway upstream / issuer 即可接企业 SSO。
+
+详见 [统一登录](./unified-login) · [Auth Gateway](./auth-gateway)。
 
 ## 2. 共享组件
 
@@ -34,7 +38,7 @@ cd LuminaryWorks/shared
 pnpm install && pnpm build
 ```
 
-产出 `@luminaryworks/auth-core`、`@luminaryworks/auth-react`、`@luminaryworks/pal`，供各产品复用认证与权限能力。
+产出 `@luminaryworks/auth-core`、`@luminaryworks/auth-react`、`@luminaryworks/pal`、`@luminaryworks/notification`，供各产品复用认证、权限与邮件通知能力。
 
 ## 3. 启动产品
 
@@ -45,7 +49,8 @@ pnpm install && pnpm build
 | 服务 | 端口 |
 |------|------|
 | Identity OIDC / Admin | 3001 / 3002 |
-| DataView / DataTalk | 3003 / 8084 |
+| Auth Gateway | 3010 |
+| DataView / DataTalk | 3003 / 7084 |
 | VibeEdu edu-app | 18082 |
 | DoerFlow web / api | 5174 / 13008 |
 | VistaRemote admin | 5175 |
@@ -55,6 +60,8 @@ pnpm install && pnpm build
 ## 延伸阅读
 
 - [统一登录接入](./unified-login)
+- [Auth Gateway](./auth-gateway)
 - [数据存储与 PostgreSQL](./datastore)
 - [共享库 @luminaryworks/*](./shared-packages)
+- [通知模块 Notification](./notification)
 - [总体架构](/guide/architecture)

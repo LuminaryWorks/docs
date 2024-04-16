@@ -15,7 +15,7 @@
 │  VistaRemote server · iot-gateway · ThingsBoard CE                 │
 ├──────────────────────────────────────────────────────────────────┤
 │  LuminaryWorks 共享服务层                                           │
-│  Identity (Logto) · @luminaryworks/auth-* · @luminaryworks/pal     │
+│  Identity (Logto) · Auth Gateway · auth-* · pal · notification · entitlement        │
 ├──────────────────────────────────────────────────────────────────┤
 │  行业协议层                                                         │
 │  OIDC/JWT · MQTT/EMQX · ONVIF/RTSP · WebRTC · REST/OpenAPI        │
@@ -46,9 +46,21 @@
 
 | 能力 | 作用 |
 |------|------|
-| 统一身份 Identity | 中央 Logto OIDC，一次登录贯通多产品 |
-| auth-core / auth-react | 后端验签与前端 PKCE 接入 |
-| PAL 权限层 | 可插拔 `resource:action` 权限模型 |
+| 统一身份 Identity | 中央 Logto OIDC；登录 UI 默认 Experience API（Headless）多品牌 |
+| **Auth Gateway** | OIDC 反代；产品不直绑 IdP 厂商，换 Logto/Auth0/Keycloak 只改 upstream |
+| auth-core / auth-react | 后端 JWKS 验签与前端 OIDC PKCE |
+| Casbin（各产品） | 资源级 AuthZ；JWT 不塞业务 ACL |
+| Entitlement | 中央商业权益（Trial / 套餐 / License）；不进 JWT |
+| PAL 权限层 | 可插拔 `resource:action` 抽象，可对接 Casbin |
+| notification | 平台 NotificationModule（一期 Email / SMTP） |
 | 工程基线 tooling | 统一代码质量与 TypeScript 基线 |
+
+```text
+AuthN: Auth Gateway → IdP (Logto / 企业 SSO)
+Entitlement: 中央权益服务（商业能力）
+AuthZ: 产品 Casbin PermissionService（资源 ACL）
+```
+
+详情：[统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification) · MetaRepo [`spec/identity-and-permissions.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/identity-and-permissions.md)。
 
 这套架构让生态既能形成完整价值链，又不牺牲各产品独立融资、独立交付与独立演进的能力。
