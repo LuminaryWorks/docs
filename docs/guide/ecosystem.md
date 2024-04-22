@@ -1,6 +1,6 @@
 # 生态叙事
 
-AI 正在重塑软件价值链：从「写代码」到「编排 Agent」，从「看报表」到「设备自治」，从「中心化 SaaS」到「可私有化 + 链上结算」。单一产品难以覆盖 **教育 → 设备 → 数据 → 视觉 → 运维 → 交易** 全链路。
+AI 正在重塑软件价值链：从「写代码」到「编排 Agent」，从「看报表」到「设备自治」，从「中心化 SaaS」到「可私有化 + 链上结算」。单一产品难以覆盖 **创造/教育 → 设备 → 数据 → 视觉 → 运维 → 交易** 全链路。
 
 **[LuminaryWorks（启明工坊）](https://luminaryworks.dev)** 用**六个可独立商业化的开源产品**，以标准协议拼接成可选的 AI 产业生态。
 
@@ -8,7 +8,7 @@ AI 正在重塑软件价值链：从「写代码」到「编排 Agent」，从�
 
 | 品牌 | 中文名 | 官网 | 关键词 | 独立价值 | 在生态中 |
 |------|--------|------|--------|----------|----------|
-| [BlockyEdu](https://blockyedu.com) | 智码工坊 | [blockyedu.com](https://blockyedu.com) | 学 | AI 编程教育 | 输送工程师与实训场景 |
+| [BlockyEdu](https://blockyedu.com) | 智码工坊 | [blockyedu.com](https://blockyedu.com) | 学 + 创 | AI 全民创造 + **VibeLearn 企业大学私有化**（对标知鸟） | 产出可发布作品；也可单独交付企业内部培训 LMS |
 | [SyncroBrain](https://syncrobrain.com) | 万物智脑 | [syncrobrain.com](https://syncrobrain.com) | 连 | 开源 IoT PaaS | 设备接入与规则管道 |
 | [DataLuminary](https://dataluminary.dev) | 数据明鉴 | [dataluminary.dev](https://dataluminary.dev) | 看 | 数据洞察 / 大屏 | 统一可视化与决策层 |
 | [VistaCast](https://vistacast.dev) | 视界云遥 | [vistacast.dev](https://vistacast.dev) | 视 | AI 摄像头云监控 | 线下视觉事件流 |
@@ -21,7 +21,9 @@ AI 正在重塑软件价值链：从「写代码」到「编排 Agent」，从�
 
 | 客户 | 推荐组合 |
 |------|----------|
-| 硬件创业公司 | SyncroBrain + BlockyEdu |
+| 硬件创业公司 / 创客教育 | SyncroBrain + BlockyEdu（创造 + 标准玩具 / 实验课） |
+| 培训机构 / 学校 | BlockyEdu 学中创；或 **VibeLearn 私有化**企业大学 |
+| 大中型企业内训 / 合规 | **VibeLearn `edu-standalone`**（知鸟类：组织/SSO/必修/考试/证书） |
 | 制造企业 | SyncroBrain + DataLuminary + VistaCast + VistaRemote |
 | 连锁零售 | VistaCast + DataLuminary |
 | 数据团队 | DataLuminary 单体 |
@@ -34,7 +36,8 @@ AI 正在重塑软件价值链：从「写代码」到「编排 Agent」，从�
 更多厂商接入 IoT ──► 更多遥测与视频数据 ──► DataLuminary 洞察增值
         │                                      │
         ▼                                      ▼
- BlockyEdu 输送工程师          VistaCast AI 告警 + DoerFlow Agent
+ BlockyEdu 创造作品 + VibeLearn 企业大学   VistaCast AI 告警 + DoerFlow Agent
+   （Web / 小程序 / 玩具 · 私有化内训）              │
         │                                      │
         └──────► VistaRemote 人工运维 ◄────────┘
 ```

@@ -30,7 +30,7 @@
 
 - **开源可私有化**，许可与扩容成本更低
 - **不止设备管理**：AI 推理（[DoerFlow](https://doerflow.dev)）+ 专业大屏（[DataLuminary](https://dataluminary.dev)）+ 远程运维（[VistaRemote](https://remote.vistacast.dev)）+ 视觉 AI（[VistaCast](https://vistacast.dev)）
-- **BlockyEdu AI 辅助接入**，缩短固件与 MQTT 联调周期
+- **BlockyEdu AI 辅助接入与标准玩具孪生**，缩短固件 / MQTT 联调周期；真机连接 / OTA 由 SyncroBrain 承载
 - **标准协议**：MQTT、REST、OIDC，无厂商锁定
 
 ## 核心链路

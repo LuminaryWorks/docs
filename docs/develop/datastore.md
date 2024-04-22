@@ -23,7 +23,7 @@
 | **DataLuminary** | PostgreSQL | 平台主库与大屏元数据 |
 | **Identity / Logto** | PostgreSQL | 统一身份数据 |
 | **SyncroBrain** | PostgreSQL | 网关与业务元数据；时序可叠加 ClickHouse |
-| **BlockyEdu** | PostgreSQL | 课程、账号与教学数据 |
+| **BlockyEdu** | PostgreSQL | 作品（Artifact）、账号；VibeLearn 课程 / 组织 / 考试 / 证书 |
 | **VistaCast** | PostgreSQL | 摄像头、规则与告警数据 |
 | **VistaRemote** | PostgreSQL | 会话、设备与审计数据 |
 | **DoerFlow** | SQLite | 链下索引与边缘友好部署 |

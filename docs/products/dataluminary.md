@@ -41,7 +41,7 @@ AI 数据洞察平台：空间化数据集管理、DataTalk 可视化大屏、�
 | [VistaCast](https://vistacast.dev) | [vistacast.dev](https://vistacast.dev) | 摄像头告警、客流与安防报表 |
 | [VistaRemote](https://remote.vistacast.dev) | [remote.vistacast.dev](https://remote.vistacast.dev) | 远程会话录制、AI 摘要报表 |
 | [DoerFlow](https://doerflow.dev) | [doerflow.dev](https://doerflow.dev) | Agent 运行指标、链上交易可视化 |
-| [BlockyEdu](https://blockyedu.com) | [blockyedu.com](https://blockyedu.com) | 数据分析实训、SQL/可视化课程 |
+| [BlockyEdu](https://blockyedu.com) | [blockyedu.com](https://blockyedu.com) | 创作漏斗 / 学情；**VibeLearn** 企业培训报表；SQL/可视化实训课 |
 
 ## 快速开始
 

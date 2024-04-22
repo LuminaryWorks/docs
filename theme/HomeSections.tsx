@@ -3,9 +3,9 @@ import { Link } from "@rspress/theme-default";
 
 const products = [
   {
-    badge: "学",
+    badge: "学+创",
     name: "BlockyEdu · 智码工坊",
-    description: "面向 AI 编程教育与 IoT 实验教学。",
+    description: "全民创造 + VibeLearn 企业大学私有化。",
     href: "/products/blockyedu",
     logo: "/brand/blockyedu-logo.svg",
   },
@@ -48,10 +48,10 @@ const products = [
 
 const flow = [
   {
-    badge: "学",
+    badge: "学+创",
     href: "https://blockyedu.com",
     name: "BlockyEdu",
-    description: "AI 编程教育与 IoT 实训",
+    description: "创造平台 + 企业大学私有化",
     logo: "/brand/blockyedu-logo.svg",
   },
   {
