@@ -7,7 +7,7 @@
 | 包 | 用途 | 端 |
 |----|------|----|
 | `@luminaryworks/auth-core` | OIDC JWKS 验签、`LuminaryAuthModule` | NestJS 后端 |
-| `@luminaryworks/auth-react` | OIDC PKCE、`LuminaryAuthProvider` | React SPA |
+| `@luminaryworks/auth-react` | OIDC PKCE、`HeadlessLoginPanel`（可用 `showSocialConnectors={false}` 关闭社交登录） | React SPA |
 | `@luminaryworks/pal` | 权限抽象层（native / oidc-claims） | NestJS 后端 |
 | `@luminaryworks/notification` | 平台 `NotificationModule`（一期 Email / SMTP） | NestJS 后端 |
 | `@luminaryworks/tooling` | Biome preset、tsconfig base | workspace 内部 |
@@ -23,7 +23,8 @@
 ```
 
 ```bash
-pnpm add @luminaryworks/auth-core@^0.2.0
+pnpm add @luminaryworks/auth-core@^0.2.1
+pnpm add @luminaryworks/auth-react@^0.3.1
 pnpm add @luminaryworks/notification@^0.1.0
 ```
 

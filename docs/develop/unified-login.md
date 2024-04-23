@@ -81,9 +81,32 @@ VITE_ALLOW_LOCAL_LOGIN=false
 
 ## Headless 登录（Experience API）
 
-- **用**：Experience API / `@luminary/auth-react`（OIDC PKCE）做注册、登录、找回、MFA、SSO。
+- **用**：Experience API / `@luminaryworks/auth-react`（OIDC PKCE）做注册、登录、找回、MFA、SSO。
 - **不用**：Management API 给前端；不要 fork Logto `packages/experience`。
 - **Auth Gateway**：换 IdP 只改 `UPSTREAM_ISSUER`。见 [Auth Gateway](./auth-gateway)。
+
+### 社交登录（Google / GitHub 等）可关
+
+`HeadlessLoginPanel` 默认从 IdP 拉取已启用的 Experience social connectors（Google、GitHub、…）并展示按钮。**管理后台 / 内部控制台**通常只需统一账密（或企业 SSO），应关闭社交入口：
+
+```tsx
+import { HeadlessLoginPanel } from "@luminaryworks/auth-react";
+
+// 管理后台：隐藏 Google / GitHub 等社交授权
+<HeadlessLoginPanel
+  config={idp}
+  productName="DataLuminary Admin"
+  showSocialConnectors={false}
+  mode="redirect"
+/>
+```
+
+| Prop | 默认 | 说明 |
+|------|------|------|
+| `showSocialConnectors` | `true` | `false` 时不请求 connectors，并隐藏分割线与社交按钮 |
+| `socialProviders` | `"auto"` | `"auto"` 用 IdP 全部启用项；`string[]` 白名单；`[]` 等价于关闭（与 `showSocialConnectors={false}` 同效） |
+
+产品面向终端用户的登录页保持默认 `true`；仅运营/Admin SPA 设为 `false`。企业 SSO（SAML/OIDC Connector）仍在 IdP 侧配置，与本开关无关。
 
 ## 后端接入（NestJS）
 
