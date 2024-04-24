@@ -14,25 +14,27 @@
 
 通知接入详见 [通知模块 Notification](./notification)。
 
-## 安装（GitHub Packages）
+## 安装（npmjs 公开包）
 
 ```ini
-# .npmrc（PAT 需 read:packages）
-@luminaryworks:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+# .npmrc（无需 GitHub Packages token）
+engine-strict=true
+@luminaryworks:registry=https://registry.npmjs.org
 ```
 
 ```bash
-pnpm add @luminaryworks/auth-core@^0.2.1
+pnpm add @luminaryworks/auth-core@^0.2.2
 pnpm add @luminaryworks/auth-react@^0.3.1
 pnpm add @luminaryworks/notification@^0.1.0
 ```
 
 发布说明：[shared/PUBLISH.md](https://github.com/LuminaryWorks/shared/blob/master/PUBLISH.md)
 
+GitHub 仓库可见性不变；只有 npm 包从 GitHub Packages 改为 npmjs 公开包。
+
 ## 本地联调（可选）
 
-未配置 registry 或离线时，可在消费方 `package.json` 用相对路径指向 sibling 布局下的 `shared` 包：
+改 shared 尚未发版或离线时，可在消费方 `package.json` 用相对路径指向 sibling 布局下的 `shared` 包：
 
 ```jsonc
 "@luminaryworks/auth-core": "file:../../LuminaryWorks/shared/packages/auth-core",
