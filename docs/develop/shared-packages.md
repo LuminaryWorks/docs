@@ -17,9 +17,8 @@
 ## 安装（npmjs 公开包）
 
 ```ini
-# .npmrc（无需 GitHub Packages token）
+# .npmrc（公开 npmjs 包走默认源，无需单独指定 @luminaryworks registry）
 engine-strict=true
-@luminaryworks:registry=https://registry.npmjs.org
 ```
 
 ```bash
