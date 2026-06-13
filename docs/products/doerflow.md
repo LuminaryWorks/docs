@@ -1,6 +1,6 @@
-# AgentSkillMesh · 链上 AI 市场
+# DoerFlow · 智工网
 
-> 角色 **赚** · 组织 [AgentSkillMesh](https://github.com/AgentSkillMesh) · MetaRepo [VibeAgent](https://github.com/AgentSkillMesh/VibeAgent)
+> 角色 **赚** · 组织 [doerflow](https://github.com/doerflow) · MetaRepo [VibeAgent](https://github.com/doerflow/VibeAgent)
 
 以太坊上的 AI Agent / Skill 去中心化市场：发布、订阅、托管结算、风控与声誉。可单独服务 Web3 + AI 社区，也可作为生态「变现层」。
 
@@ -24,22 +24,22 @@
 ## 在生态中
 
 - IoT 设备可注册视觉 / 控制 Agent，设备 owner 获链上收益
-- LuminaryIoTChain 遥测事件可触发链下 Skill 推理，结果回写或结算
+- SyncroBrain 遥测事件可触发链下 Skill 推理，结果回写或结算
 - DataLuminary 展示交易、调用量与运行健康度
 
 ## 典型集成
 
 | 兄弟产品 | 场景 |
 |----------|------|
-| LuminaryIoTChain | 设备 Agent 上架、遥测触发推理 |
+| SyncroBrain | 设备 Agent 上架、遥测触发推理 |
 | DataLuminary | 交易与运行数据可视化 |
 | BlockyEdu | 合约 / Agent / Skill 开发课程 |
-| VistaRemote | Worker 端远程调试与录制审计 |
+| VistaCast | Worker 端远程调试与录制审计 |
 
 ## 快速开始
 
 ```bash
-git clone https://github.com/AgentSkillMesh/VibeAgent.git
+git clone https://github.com/doerflow/VibeAgent.git
 cd VibeAgent
 # 见 spec/development/unified-login.md
 ```

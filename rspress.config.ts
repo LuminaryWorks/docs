@@ -3,11 +3,11 @@ import { defineConfig } from "rspress/config";
 
 export default defineConfig({
   root: "docs",
-  title: "LuminaryWorks",
-  description: "AI 原生开源生态 — 学 · 连 · 看 · 控 · 赚",
+  title: "LuminaryWorks · 启明工坊",
+  description: "AI 原生开源生态 — 学 · 连 · 看 · 视 · 控 · 赚",
   icon: "/logo.png",
   logo: "/logo.png",
-  logoText: "LuminaryWorks",
+  logoText: "启明工坊",
   globalStyles: path.join(__dirname, "styles/index.css"),
   themeConfig: {
     darkMode: true,
@@ -32,14 +32,15 @@ export default defineConfig({
       ],
       "/products/": [
         {
-          text: "五大产品",
+          text: "六大产品",
           items: [
             { text: "概览", link: "/products/" },
-            { text: "DataLuminary · 数据洞察", link: "/products/dataluminary" },
-            { text: "BlockyEdu · AI 教育", link: "/products/vibeedu" },
-            { text: "LuminaryIoTChain · IoT PaaS", link: "/products/iotchain" },
-            { text: "VistaRemote · 远程运维", link: "/products/vistaremote" },
-            { text: "AgentSkillMesh · 链上 AI 市场", link: "/products/vibeagent" },
+            { text: "DataLuminary · 数据明鉴", link: "/products/dataluminary" },
+            { text: "BlockyEdu · 智码工坊", link: "/products/blockyedu" },
+            { text: "SyncroBrain · 万物智脑", link: "/products/syncrobrain" },
+            { text: "VistaCast · 视界云遥", link: "/products/vistacast" },
+            { text: "VistaRemote · 视界远程", link: "/products/vistaremote" },
+            { text: "DoerFlow · 智工网", link: "/products/doerflow" },
           ],
         },
       ],
@@ -48,7 +49,7 @@ export default defineConfig({
           text: "开发者指南",
           items: [
             { text: "快速开始", link: "/develop/getting-started" },
-            { text: "新人上手（五产品）", link: "/develop/onboarding" },
+            { text: "新人上手（六产品）", link: "/develop/onboarding" },
             { text: "统一登录接入", link: "/develop/unified-login" },
             { text: "登录/权限路线图", link: "/develop/identity-roadmap" },
             { text: "数据存储（弃 MySQL · 默认 PG）", link: "/develop/datastore" },
@@ -59,7 +60,7 @@ export default defineConfig({
       ],
     },
     footer: {
-      message: "LuminaryWorks · AI 原生开源生态 · Apache-2.0",
+      message: "LuminaryWorks · 启明工坊 · AI 原生开源生态 · Apache-2.0",
     },
   },
 });
