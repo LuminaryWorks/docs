@@ -2,6 +2,7 @@
   "name": "@luminaryworks/docs",
   "version": "0.1.0",
   "private": true,
+  "license": "Polyform-Noncommercial-1.0.0",
   "description": "LuminaryWorks ecosystem marketing & developer portal (RsPress)",
   "scripts": {
     "dev": "rspress dev",

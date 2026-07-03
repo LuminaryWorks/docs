@@ -1,0 +1,40 @@
+---
+description: UTF-8 / JSON / Markdown file safety — no BOM, no mojibake, no shell bulk edits
+alwaysApply: true
+---
+
+# File encoding & JSON safety (LuminaryWorks ecosystem)
+
+## Encoding
+
+- **Always UTF-8 without BOM** for `.json`, `.md`, `.mdc`, locale/message files, and `package.json`.
+- **Never** use Windows PowerShell `Set-Content -Encoding UTF8` or `Out-File -Encoding utf8` on source files (writes UTF-8 BOM and can corrupt Unicode).
+- **Never** re-save UTF-8 text as GBK/ANSI or read UTF-8 as a legacy code page (causes `鈥?`, `锟`, `杩愯惀` mojibake).
+- Prefer **Node.js** (`fs.readFileSync` / `fs.writeFileSync` with `{ encoding: 'utf8' }`) or editors that default to UTF-8 no BOM.
+
+## JSON edits
+
+- After any JSON change, **parse with `JSON.parse`** (or project formatter) before finishing.
+- Root must start with `{` or `[`; do not strip the opening brace.
+- For structured JSON, prefer `JSON.stringify(obj, null, 2) + '\n'` over manual string surgery on large files.
+- Do **not** use regex bulk replace across entire `messages/*.json` or `scripts/**/*.json` trees in PowerShell.
+
+## Markdown & i18n
+
+- Preserve punctuation: `—`, `·`, `→`, CJK, and emoji must remain valid Unicode.
+- If a file already shows mojibake, **restore from git** (`git checkout HEAD -- <file>`) then re-apply the minimal text diff.
+
+## Bulk changes
+
+- License/i18n sweeps: use `scripts/ecosystem-fix-json-encoding.mjs` or a small Node script with validation.
+- Run `node scripts/ecosystem-fix-json-encoding.mjs --verify` after touching JSON in multiple repos.
+
+## Examples
+
+```powershell
+# BAD — adds BOM, may corrupt JSON
+Set-Content file.json $content -Encoding UTF8 -NoNewline
+
+# GOOD — Node, UTF-8 no BOM
+node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); p.license='Polyform-Noncommercial-1.0.0'; fs.writeFileSync('package.json', JSON.stringify(p,null,2)+'\n');"
+```
