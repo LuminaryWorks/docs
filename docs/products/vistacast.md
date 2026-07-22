@@ -1,83 +1,62 @@
 # VistaCast · 视界云遥
 
-> 角色 **视** · 组织 [VistaCast](https://github.com/VistaCast) · 官网 [vistacast.dev](https://vistacast.dev) · **状态**：📋 D0 规划 / 文档阶段
+![VistaCast](/brand/vistacast-logo.svg)
 
-**AI Visual Autopilot** — 纯软件 AI 云监控，兼容海康、大华、小米、TP-Link 等 ONVIF/RTSP 摄像头。不做硬件，把固定摄像头变成结构化安全与运营事件。
 
-## 定位
+> 角色 **视** · 组织 [VistaCast](https://github.com/VistaCast) · 官网 [vistacast.dev](https://vistacast.dev)
+
+**AI Visual Autopilot** — 纯软件 AI 云监控层，兼容海康、大华、小米、TP-Link 等 ONVIF/RTSP 摄像头。把存量固定摄像头升级为结构化安全与运营事件源，可独立私有化交付。
+
+## 产品定位
 
 | 维度 | 说明 |
 |------|------|
 | 一句话 | 存量摄像头的 AI 升级层 — 客流、防盗、异常检测 |
-| 生态角色 | **视** — 线下视觉数据流 + AI 事件源 |
-| 独立商用 | 可不依赖兄弟产品单独部署 |
+| 生态角色 | **视** — 线下视觉数据流与 AI 事件源 |
+| 商业形态 | 可单独部署，也可与兄弟产品组合交付 |
 | 与 VistaRemote | **并存**：VC = 摄像头 AI；VR = 远程桌面人工触达 |
+
+## 核心能力
+
+| 能力 | 说明 |
+|------|------|
+| **摄像头接入** | 兼容主流 ONVIF / RTSP 设备，无需绑定专用硬件 |
+| **智能告警** | 陌生人脸、区域入侵、夜间异动等自动识别与推送 |
+| **客流分析** | 排队、时段分布、门店运营热力，服务连锁与零售 |
+| **规则引擎** | 告警去重、阈值策略、场景化规则编排 |
+| **异常检测** | 跌倒、打斗、烟雾等更高阶安全事件识别 |
+| **生态出站** | Webhook / MQTT 事件输出，对接大屏、运维与 Agent |
+| **统一登录** | 接入 LuminaryWorks OIDC，支持企业 IdP |
 
 ## 目标场景
 
-| 优先级 | 场景 | AI 能力 |
-|:------:|------|---------|
-| P0 | 连锁门店（奶茶/快餐） | 客流、排队、时段分布 |
-| P0 | 仓储防盗 | 陌生人脸、越界、夜间异动 |
-| P1 | 工厂危险区域 | 闯入、跌倒/烟雾/打架 |
-| P2 | 物业多站点 | 统一看板（M3） |
+| 场景 | 能力价值 |
+|------|----------|
+| 连锁门店 | 客流、排队、营业时段洞察 |
+| 仓储物流 | 陌生人识别、越界与夜间异动 |
+| 工厂安全 | 危险区域闯入与异常行为告警 |
+| 物业多站点 | 统一视觉安防看板与事件中枢 |
 
-## 版本路线
+## 远期展望
 
-| 阶段 | 代号 | 交付 |
-|:----:|------|------|
-| D0 | Blueprint | 战略、产品、架构 Spec（**当前**） |
-| M1 | Horizon | ONVIF + Admin + 客流/陌生人告警 + Docker 私有化 |
-| M2 | Sentinel | 规则引擎 GA、异常检测、Webhook/MQTT |
-| M3 | Nexus | Re-ID、DataLuminary 大屏模板、SyncroBrain 联动 |
+- 跨摄像头 Re-ID 与多站点统一身份轨迹
+- 与 DataLuminary 深度联动的安防 / 客流大屏模板
+- 与 SyncroBrain 设备台账、DoerFlow Skill 形成事件驱动闭环
+- 告警后一键联动 VistaRemote，实现「自动发现 → 人工介入」
 
-M1 编码启动条件：DataLuminary、BlockyEdu P0 完成 + 试点场景确认。
+## 技术栈
 
-## 规划能力（按里程碑）
-
-| 能力 | M1 | M2 | M3 |
-|------|:--:|:--:|:--:|
-| 陌生人脸告警 | ✅ | | |
-| 客流统计与报表 | ✅ | | |
-| 区域入侵 | ✅ | | |
-| 规则引擎 / 告警去重 | 基础 | GA | |
-| 异常检测（摔倒/打架/冒烟） | | ✅ | |
-| Webhook / MQTT 出站 | | ✅ | |
-| 跨摄像头 Re-ID | | | ✅ |
-| DataLuminary 数据集模板 | | | ✅ |
-
-## 与 VistaRemote 的区别
-
-| | VistaCast | [VistaRemote](./vistaremote) |
-|---|-----------|------------------------------|
-| 输入 | 固定摄像头 ONVIF/RTSP | 远程桌面 WebRTC |
-| 价值 | AI 自动告警、防盗、客流 | 人工远程操作、录制审计 |
-| 状态 | 文档先行 | 已有代码基线 |
-
-## 技术栈（规划）
-
-NestJS + Fastify + TypeORM + PostgreSQL · ONVIF/RTSP · WebSocket · React Admin · `@luminaryworks/auth-core`
-
-开发方法：**Spec-Driven + Artifacts Workflow**（`spec/` → `artifacts/contracts/` → `repos/`）
+NestJS + Fastify + TypeORM + PostgreSQL · ONVIF / RTSP · WebSocket · React Admin · `@luminaryworks/auth-core`
 
 ## 在生态中
 
 ```text
 VistaCast（视）— vistacast.dev
-  ├─► DataLuminary   dataluminary.dev — 告警/客流大屏
+  ├─► DataLuminary   dataluminary.dev — 告警 / 客流大屏
   ├─► SyncroBrain    syncrobrain.com — 设备台账互补
-  ├─► VistaRemote    remote.vistacast.dev — 告警后可选人工介入
+  ├─► VistaRemote    remote.vistacast.dev — 告警后人工介入
   ├─► DoerFlow       doerflow.dev — 视觉事件触发 Skill
-  └─► BlockyEdu      blockyedu.com — 安防实训
+  └─► BlockyEdu      blockyedu.com — 安防与视觉 AI 实训
 ```
 
-## 文档
-
-| 文档 | 链接 |
-|------|------|
-| 战略分析 | [spec/strategic-analysis.md](https://github.com/VistaCast/vistacast/blob/main/spec/strategic-analysis.md) |
-| 产品路线图（FR/US） | [spec/product-roadmap.md](https://github.com/VistaCast/vistacast/blob/main/spec/product-roadmap.md) |
-| 路线图 | [ROADMAP.md](https://github.com/VistaCast/vistacast/blob/main/ROADMAP.md) |
-| LuminaryWorks spec | [spec/products/vistacast.md](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/products/vistacast.md) |
-
-**当前无公开实现仓。** 规划 spec 见 [VistaCast/vistacast](https://github.com/VistaCast/vistacast)。请勿 clone 旧 vistacast 远程桌面仓库当作本产品。
+更多信息：[vistacast.dev](https://vistacast.dev) · [GitHub VistaCast](https://github.com/VistaCast)

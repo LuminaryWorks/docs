@@ -1,45 +1,33 @@
-# 数据存储策略 — 后台弃 MySQL，默认 PostgreSQL
+# 数据存储策略
 
-> 权威规格：[datastore-strategy v2.2](https://github.com/dataluminary/DataLuminary-Platform/blob/main/spec/datastore-strategy.md)
+生态后台默认采用 **PostgreSQL** 作为关系型 OLTP，避免多产品私有化时维护异构数据库栈。
 
-## 架构选型（服务端）
-
-**LuminaryWorks 后台 OLTP 彻底弃用 MySQL。** 凡需要关系型数据库的服务端，统一 **PostgreSQL**。这是架构层决策，不是单次迁移项目。
+## 选型原则
 
 | 原则 | 说明 |
 |------|------|
-| **弃 MySQL（后台）** | 新产品/新服务不得把 MySQL 当 OLTP；遗留 compose 须清理 |
-| **PostgreSQL** | DataLuminary、SyncroBrain、Logto、BlockyEdu、VistaCast 等后台默认引擎 |
-| **SQLite** | **仅 DoerFlow** 链下索引（嵌入式，非 MySQL 折中） |
-| **MySQL 插件** | **仅** DataTalk 连接**客户**已有库 — 与平台后台无关 |
+| **PostgreSQL 默认** | DataLuminary、SyncroBrain、Logto、BlockyEdu、VistaCast、VistaRemote 等后台统一 PG |
+| **SQLite 特例** | DoerFlow 链下索引采用嵌入式 SQLite，适配单机 / 边缘部署 |
+| **客户侧 MySQL** | 仅作为 DataTalk 连接客户已有库的数据源插件，不作为平台后台引擎 |
 
-### 为何选 PostgreSQL（尤其 AI 生态）
+### 为什么是 PostgreSQL
 
-1. **扩展性好** — JSONB、扩展（如 `pgvector`）便于 AI 元数据、RAG、权限字段演进。  
-2. **行业默认** — 新项目与 AI 圈子（Supabase、Neon、开源 Agent/IdP 栈）普遍以 PG 为默认关系库。  
-3. **运维一致** — 与 Logto、多产品私有化交付同栈，客户只需维护一种 OLTP。  
+1. **扩展性好** — JSONB、`pgvector` 等扩展便于 AI 元数据、RAG 与权限模型演进  
+2. **行业默认** — 新项目与 AI / IdP 开源栈普遍以 PG 为默认关系库  
+3. **运维一致** — 多产品私有化交付只需维护一种 OLTP
 
-更完整说明：[why-postgresql](https://github.com/dataluminary/DataLuminary-Platform/blob/main/spec/development/why-postgresql.md)
+## 各产品存储定位
 
-## 各产品 OLTP
-
-| 产品 | 引擎 | 状态 |
+| 产品 | OLTP | 说明 |
 |------|------|------|
-| **DataLuminary** | PostgreSQL :5433 | ✅ 已迁移 |
-| **Logto** | PostgreSQL :5432 | ✅ |
-| **SyncroBrain** | PostgreSQL :5434 | 🟡 |
-| **BlockyEdu** | PostgreSQL（目标） | ⬜ 自 SQLite MVP，不经 MySQL |
-| **DoerFlow** | **SQLite**（文件库） | ✅ 保持 |
-| **VistaCast** | PostgreSQL（目标） | ⬜ ADM-1，不经 MySQL |
-
-## DataLuminary 验收
-
-`pnpm bootstrap` → `data_talk` 库含 `user`、`space`、`dashboard`、`migrations` 等表。
-
-## 路线图
-
-[ecosystem-datastore-roadmap](https://github.com/dataluminary/DataLuminary-Platform/blob/main/plan/ecosystem-datastore-roadmap.md)
+| **DataLuminary** | PostgreSQL | 平台主库与大屏元数据 |
+| **Identity / Logto** | PostgreSQL | 统一身份数据 |
+| **SyncroBrain** | PostgreSQL | 网关与业务元数据；时序可叠加 ClickHouse |
+| **BlockyEdu** | PostgreSQL | 课程、账号与教学数据 |
+| **VistaCast** | PostgreSQL | 摄像头、规则与告警数据 |
+| **VistaRemote** | PostgreSQL | 会话、设备与审计数据 |
+| **DoerFlow** | SQLite | 链下索引与边缘友好部署 |
 
 ## 其他存储
 
-ClickHouse（分析）· Milvus（向量）· Redis（缓存）· S3/MinIO（对象）
+ClickHouse（分析）· Milvus（向量）· Redis（缓存）· S3 / MinIO（对象存储）
