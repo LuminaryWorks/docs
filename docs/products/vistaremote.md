@@ -12,7 +12,7 @@ WebRTC 实时远程桌面控制与自托管 AI 录制洞察。适配工控机、
 | 模块 | 说明 |
 |------|------|
 | **实时控制** | WebRTC 低延迟远程桌面，支持多会话与权限分级 |
-| **AI 录制洞察** | 会话录制 + 自托管 AI 摘要、异常检测与检索 |
+| **AI 录制洞察** | 会话录制 + 自托管 AI 摘要、异常检测与检索；LLM 走 [AI 平台](/develop/ai-platform) 契约，默认不出网 |
 | **管理台** | 设备/会话管理、审计日志、PAL 权限 |
 | **多端** | Electron Agent、Web Client/Admin、React Native 主控 |
 | **统一登录** | LuminaryWorks OIDC，与企业 IdP 可替换 |

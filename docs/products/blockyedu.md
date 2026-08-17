@@ -70,7 +70,7 @@ AI 全民创造平台：用户用自然语言、积木或代码，把想法变�
 - **创造 / 编程后端**：NestJS（code-server）+ TypeORM + **PostgreSQL**
 - **教育后端**：独立 `edu-server`（VibeLearn）
 - **前端**：`code-app-web`（Rsbuild + React + Blockly + Monaco）；`edu-app-web`（Next.js）
-- **AI**：独立 ai-engine / ai-bridge（创作生成 + 教学辅导）
+- **AI**：教辅 / 创造编排在产品内；模型密钥与补全走 [LuminaryWorks AI 平台](/develop/ai-platform) 契约（`ai-bridge` 作 BFF，不新建平行 `ai-engine`）
 - **预览**：独立 origin Preview Host（与脚本控制台执行解耦）
 - **直播（Live 包）**：`media-platform`（WebRTC / 信令）
 

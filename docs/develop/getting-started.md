@@ -31,6 +31,10 @@ pnpm auth:gateway   # http://localhost:3010/oidc
 
 详见 [统一登录](./unified-login) · [Auth Gateway](./auth-gateway)。
 
+## 1.1 AI 平台
+
+产品保留领域智能；模型密钥、补全与计量走共享 AI 网关契约（可先本地 BYOK 适配器）。见 [AI 平台](./ai-platform)。
+
 ## 2. 共享组件
 
 ```bash

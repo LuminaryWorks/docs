@@ -69,6 +69,7 @@ export default defineConfig({
             { text: "数据存储（PostgreSQL）", link: "/develop/datastore" },
             { text: "共享库 @luminaryworks/*", link: "/develop/shared-packages" },
             { text: "通知模块 Notification", link: "/develop/notification" },
+            { text: "AI 平台", link: "/develop/ai-platform" },
             { text: "协作规范", link: "/develop/collaboration" },
           ],
         },

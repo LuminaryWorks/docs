@@ -15,7 +15,7 @@
 │  VistaRemote server · iot-gateway · ThingsBoard CE                 │
 ├──────────────────────────────────────────────────────────────────┤
 │  LuminaryWorks 共享服务层                                           │
-│  Identity (Logto) · Auth Gateway · auth-* · pal · notification · entitlement        │
+│  Identity · Auth Gateway · auth-* · pal · notification · entitlement · AI Platform │
 ├──────────────────────────────────────────────────────────────────┤
 │  行业协议层                                                         │
 │  OIDC/JWT · MQTT/EMQX · ONVIF/RTSP · WebRTC · REST/OpenAPI        │

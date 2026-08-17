@@ -28,6 +28,8 @@
 | **生态出站** | Webhook / MQTT 事件输出，对接大屏、运维与 Agent |
 | **统一登录** | 接入 LuminaryWorks OIDC，支持企业 IdP |
 
+实时 CV / ONNX **不**走 LLM 网关；告警叙事等文本推理可选 [AI 平台](/develop/ai-platform)（文档阶段）。
+
 ## 目标场景
 
 | 场景 | 能力价值 |

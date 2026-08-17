@@ -17,6 +17,8 @@
 | **生态网关** | NestJS iot-gateway：JWT 验签、PAL、与 DataTalk / Agent 对接 |
 | **终端 App** | Flutter / React Native 终端模板，覆盖监控与控制场景 |
 
+设备、MQTT、规则留在产品内；可选 LLM 摘要见 [AI 平台](/develop/ai-platform)，不自建 IoT LLM 栈。
+
 ## 四层架构
 
 | 层 | 选型 | 职责 |

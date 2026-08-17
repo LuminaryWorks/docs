@@ -17,6 +17,7 @@ AI 数据洞察平台：空间化数据集管理、DataTalk 可视化大屏、�
 | **权限 (PAL)** | `space` / `dashboard` / `dataset` / `datasource` 等资源级 `resource:action` |
 | **统一登录** | **默认** LuminaryWorks 统一账号（OIDC）；经 Auth Gateway，可接企业 SSO；DataView 主 CTA 为统一登录，本地账密仅开发回退 |
 | **订阅推送邮件** | DataTalk 报表订阅经 `@luminaryworks/notification` 投递（见 [通知模块](/develop/notification)） |
+| **DataInsight（AI）** | 统一对话框：问数、可解释洞察、ChartIntent 生成原生图表 / 仪表盘；Pro feature `ai.analysis`；空间 BYOK（见 [AI 平台](/develop/ai-platform)） |
 
 ## 技术栈
 
@@ -53,4 +54,6 @@ pnpm dev:talk       # DataTalk API
 pnpm dev:view       # DataView 前端
 ```
 
-更多信息：[DataLuminary ONBOARDING](https://github.com/dataluminary/DataLuminary-Platform/blob/main/ONBOARDING.md) · [统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification)
+更多信息：[DataLuminary ONBOARDING](https://github.com/dataluminary/DataLuminary-Platform/blob/main/ONBOARDING.md) · [统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification) · [AI 平台](/develop/ai-platform)
+
+产品站文档（ProductWhitePaper）：[AI 洞察](https://github.com/DataLuminary/ProductWhitePaper/blob/main/docs/product/ai-insights.md) · [AI 设计与实现](https://github.com/DataLuminary/ProductWhitePaper/blob/main/docs/develop/ai-insights.md)
