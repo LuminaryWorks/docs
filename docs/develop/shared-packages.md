@@ -6,13 +6,20 @@
 
 | 包 | 用途 | 端 |
 |----|------|----|
-| `@luminaryworks/auth-core` | OIDC JWKS 验签、`LuminaryAuthModule` | NestJS 后端 |
-| `@luminaryworks/auth-react` | OIDC PKCE、`HeadlessLoginPanel`（可用 `showSocialConnectors={false}` 关闭社交登录） | React SPA |
+| `@luminaryworks/auth-core` | Luminary IAM **Runtime**：OIDC JWKS 验签、`LuminaryPrincipal`、`LuminaryAuthModule` | NestJS 后端 |
+| `@luminaryworks/auth-react` | Login Experience Adapter + OIDC PKCE、`HeadlessLoginPanel`（默认 Logto Experience；Hosted-only 可只走标准 OIDC） | React SPA |
+| `@luminaryworks/auth-dev-proxy` | 本地同域反代 `/oidc` + `/api/experience`；discovery 保留上游 `issuer` | 开发构建 |
 | `@luminaryworks/pal` | 权限抽象层（native / oidc-claims） | NestJS 后端 |
 | `@luminaryworks/notification` | 平台 `NotificationModule`（一期 Email / SMTP） | NestJS 后端 |
 | `@luminaryworks/tooling` | Biome preset、tsconfig base | workspace 内部 |
 
-通知接入详见 [通知模块 Notification](./notification)。
+身份边界：
+
+- 产品只依赖 Runtime + Login Experience；**不要**把 Management API / M2M 凭据放进产品或浏览器。
+- 外部身份键是 `issuer + subject`（兼容字段仍保留 `sub` / `iss` / `orgId`）。
+- 未实际接入的 IdP 不建空 adapter；缺失能力显式 unsupported。
+
+通知接入详见 [通知模块 Notification](./notification)。完整接入见 [统一登录](./unified-login)。
 
 ## 安装（npmjs 公开包）
 

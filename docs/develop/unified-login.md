@@ -95,8 +95,10 @@ pnpm verify:login:strict
 前端环境变量：
 
 ```bash
-# 生产推荐
+# 浏览器传输（推荐经 Gateway；本地也可走 SPA 同域 auth-dev-proxy）
 # VITE_AUTH_GATEWAY_URL=http://localhost:3010
+# VITE_AUTH_EXPERIENCE_URL=http://localhost:<spa-port>
+# JWT iss 始终是上游 IdP，不要改成 Gateway
 VITE_IDP_ISSUER=http://localhost:3001/oidc
 VITE_IDP_CLIENT_ID=<registered-apps.json 对应 ID>
 VITE_IDP_REDIRECT_URI=http://localhost:<port>/auth/callback
@@ -152,13 +154,15 @@ export class AppModule {}
 ```
 
 ```bash
-# 生产推荐经 Gateway
-IDP_ISSUER=http://localhost:3010/oidc
+# JWT iss = 上游 IdP（Gateway 不改写 discovery issuer）
+IDP_ISSUER=http://localhost:3001/oidc
 IDP_AUDIENCE=https://api.<product>.local
 AUTH_MODE=sso
+# 可选：经 Gateway 拉 JWKS
+# IDP_JWKS_URI=http://localhost:3010/oidc/jwks
 ```
 
-JWT 归一化为 `LuminaryPrincipal`；外部身份用 `iss + sub` 标识。Token 只含身份 / 租户 / 平台准入，**业务权限与商业权益不进 Token**。
+JWT 归一化为 `LuminaryPrincipal`；外部身份用 `issuer + subject`（兼容 `iss` / `sub`）标识。Token 只含身份 / 租户 / 平台准入，**业务权限与商业权益不进 Token**。
 
 DoerFlow 双身份：Logto 管平台会话；wallet/SIWE 管链上证明。无 Trial；401 / 402 / 403 分流。
 
