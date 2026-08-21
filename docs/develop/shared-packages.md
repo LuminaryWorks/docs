@@ -29,9 +29,9 @@ engine-strict=true
 ```
 
 ```bash
-pnpm add @luminaryworks/auth-core@^0.2.2
-pnpm add @luminaryworks/auth-react@^0.3.1
-pnpm add @luminaryworks/notification@^0.1.0
+pnpm add @luminaryworks/auth-core@^0.2.3
+pnpm add @luminaryworks/auth-react@^0.4.1
+pnpm add @luminaryworks/notification@^0.2.0
 ```
 
 发布说明：[shared/PUBLISH.md](https://github.com/LuminaryWorks/shared/blob/master/PUBLISH.md)
