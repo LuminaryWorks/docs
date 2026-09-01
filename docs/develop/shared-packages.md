@@ -7,7 +7,7 @@
 | 包 | 用途 | 端 |
 |----|------|----|
 | `@luminaryworks/auth-core` | Luminary IAM **Runtime**：OIDC JWKS 验签、`LuminaryPrincipal`、`LuminaryAuthModule` | NestJS 后端 |
-| `@luminaryworks/auth-react` | Login Experience Adapter + OIDC PKCE、`HeadlessLoginPanel`（默认 Logto Experience；Hosted-only 可只走标准 OIDC） | React SPA |
+| `@luminaryworks/auth-react` | Login Experience Adapter + OIDC PKCE、`HeadlessLoginPanel`（`IAM_PROVIDER=logto` 默认 Experience；`oidc` / `zitadel` 走 Hosted Redirect） | React SPA |
 | `@luminaryworks/auth-dev-proxy` | 本地同域反代 `/oidc` + `/api/experience`；discovery 保留上游 `issuer` | 开发构建 |
 | `@luminaryworks/pal` | 权限抽象层（native / oidc-claims） | NestJS 后端 |
 | `@luminaryworks/notification` | 平台 `NotificationModule`（一期 Email / SMTP） | NestJS 后端 |
@@ -16,8 +16,9 @@
 身份边界：
 
 - 产品只依赖 Runtime + Login Experience；**不要**把 Management API / M2M 凭据放进产品或浏览器。
+- 用 `IAM_PROVIDER`（`logto` 默认 / `oidc` / 预留 `zitadel`）选择插件，不要改产品代码绑厂商 SDK。
 - 外部身份键是 `issuer + subject`（兼容字段仍保留 `sub` / `iss` / `orgId`）。
-- 未实际接入的 IdP 不建空 adapter；缺失能力显式 unsupported。
+- 未实际接入的 IdP 不建空 adapter；缺失能力显式 unsupported。默认 IdP 选型已冻结，见 [`spec/iam-provider-selection.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/iam-provider-selection.md)。
 
 通知接入详见 [通知模块 Notification](./notification)。完整接入见 [统一登录](./unified-login)。
 

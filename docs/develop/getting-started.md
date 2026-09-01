@@ -27,9 +27,9 @@ pnpm id:up
 pnpm auth:gateway   # http://localhost:3010/oidc
 ```
 
-中央 OIDC 为各产品提供同一用户主体。产品登录页默认走统一账号；私有化改 Gateway upstream / issuer 即可接企业 SSO。
+中央 IAM Adapter 为各产品提供同一用户主体。**默认 IdP 已冻结为 Logto**（MPL-2.0）；ZITADEL 是预留插件。产品登录页默认走统一账号；私有化用 `IAM_PROVIDER=oidc` 或改 Gateway upstream / issuer 即可接企业 SSO。
 
-详见 [统一登录](./unified-login) · [Auth Gateway](./auth-gateway)。
+详见 [统一登录](./unified-login) · [Auth Gateway](./auth-gateway)。选型冻结：MetaRepo [`spec/iam-provider-selection.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/iam-provider-selection.md)。
 
 ## 1.1 AI 平台
 
@@ -63,7 +63,7 @@ pnpm install && pnpm build
 
 ## 延伸阅读
 
-- [统一登录接入](./unified-login)
+- [统一登录接入](./unified-login)（默认 Logto；`IAM_PROVIDER` 可选 oidc / 预留 zitadel）
 - [Auth Gateway](./auth-gateway)
 - [数据存储与 PostgreSQL](./datastore)
 - [共享库 @luminaryworks/*](./shared-packages)

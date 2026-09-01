@@ -22,7 +22,7 @@
 
 | 能力 | 入口 | 说明 |
 |------|------|------|
-| 统一登录 | `LuminaryWorks/identity` | 中央 Logto OIDC；登录 UI 默认 Experience Headless |
+| 统一登录 | `LuminaryWorks/identity` | IAM Adapter，**默认 Logto**（选型已冻结）；登录 UI 默认 Experience Headless；ZITADEL 为预留插件 |
 | 资源权限 | 各产品 Casbin | AuthZ 与 Logto 解耦，见 IAM 规格 |
 | 共享组件 | `LuminaryWorks/shared` | 认证、权限、通知与工程基线 |
 | 通知（Email） | `@luminaryworks/notification` | 平台 NotificationModule；见 [通知模块](./notification) |
@@ -55,5 +55,6 @@
 | VistaCast | [products/vistacast](/products/vistacast) |
 | VistaRemote | [products/vistaremote](/products/vistaremote) |
 | 统一登录 | [develop/unified-login](/develop/unified-login) |
+| IAM 选型（已冻结） | MetaRepo [`spec/iam-provider-selection.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/iam-provider-selection.md) |
 | 通知模块 | [develop/notification](/develop/notification) |
 | 产品 Auth Cursor 提示词 | [develop/product-auth-prompt](/develop/product-auth-prompt) |

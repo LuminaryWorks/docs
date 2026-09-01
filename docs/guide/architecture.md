@@ -46,8 +46,8 @@
 
 | 能力 | 作用 |
 |------|------|
-| 统一身份 Identity | 中央 Logto OIDC；登录 UI 默认 Experience API（Headless）多品牌 |
-| **Auth Gateway** | OIDC 反代；产品不直绑 IdP 厂商，换 Logto/Auth0/Keycloak 只改 upstream |
+| 统一身份 Identity | 中央 IAM Adapter，**默认 Logto**（选型已冻结）；ZITADEL 为预留插件 |
+| **Auth Gateway** | OIDC 反代；产品不直绑 IdP 厂商，换 Logto / 企业 OIDC / 预留 ZITADEL 只改 upstream |
 | auth-core / auth-react | 后端 JWKS 验签与前端 OIDC PKCE |
 | Casbin（各产品） | 资源级 AuthZ；JWT 不塞业务 ACL |
 | Entitlement | 中央商业权益（Trial / 套餐 / License）；不进 JWT |
@@ -61,6 +61,6 @@ Entitlement: 中央权益服务（商业能力）
 AuthZ: 产品 Casbin PermissionService（资源 ACL）
 ```
 
-详情：[统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification) · MetaRepo [`spec/identity-and-permissions.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/identity-and-permissions.md)。
+详情：[统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification) · MetaRepo [`spec/identity-and-permissions.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/identity-and-permissions.md) · 选型冻结 [`spec/iam-provider-selection.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/iam-provider-selection.md)。
 
 这套架构让生态既能形成完整价值链，又不牺牲各产品独立融资、独立交付与独立演进的能力。

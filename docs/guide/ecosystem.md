@@ -44,7 +44,7 @@ AI 正在重塑软件价值链：从「写代码」到「编排 Agent」，从�
 
 ## 统一体验
 
-- **默认统一账号**：经 [Auth Gateway](/develop/auth-gateway) → IdP（中心 Logto 或企业 SSO）；各产品同一用户主体（`sub`）
+- **默认统一账号**：经 [Auth Gateway](/develop/auth-gateway) → IAM Adapter（**默认 Logto**，选型已冻结；或企业 OIDC / 预留 ZITADEL）；各产品同一用户主体（`issuer + sub`）
 - **登录页**：产品品牌自建；主 CTA 为统一账号 / 企业 SSO，本地账密仅开发回退
 - **权限解耦**：身份归 IdP；商业权益归 Entitlement；资源 ACL 归各产品 Casbin（[PAL](https://github.com/LuminaryWorks/shared)）
 - **数据隔离**：无跨产品外键；仅 JWT / API / 事件关联；本地 `user_id ↔ sub` 便于业务剥离

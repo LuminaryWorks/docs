@@ -1,6 +1,8 @@
 # 统一登录与产品权限接入
 
-所有产品统一接入 **Luminary IAM Adapter**。当前 SaaS / 默认 IdP 是 [`LuminaryWorks/identity`](https://github.com/LuminaryWorks/identity)（Logto OIDC）；各产品用 Casbin 负责资源 AuthZ。登录 UI 由 Login Experience Adapter 提供，Logto 默认走 **Experience API（Headless）**。
+所有产品统一接入 **Luminary IAM Adapter**。**默认 IdP 已冻结为 Logto**（MPL-2.0、开发更简单）；ZITADEL 是预留插件，不是替换方案。**不要再重评 Logto vs ZITADEL。** 完整冻结说明：[spec/iam-provider-selection.md](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/iam-provider-selection.md)。
+
+当前 SaaS / 默认自托管走 [`LuminaryWorks/identity`](https://github.com/LuminaryWorks/identity)（Logto OIDC）；各产品用 Casbin 负责资源 AuthZ。登录 UI 由 Login Experience Adapter 提供，Logto 默认走 **Experience API（Headless）**。
 
 完整架构决策见 MetaRepo：[spec/identity-and-permissions.md](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/identity-and-permissions.md)。
 
@@ -19,7 +21,7 @@ AI 时代账号体系是生态资产，不是各产品私货：
 ## 架构一句话
 
 ```text
-              Logto | Keycloak | Entra ID | 企业 OIDC
+              Logto | ZITADEL（预留）| Keycloak | Entra ID | 企业 OIDC
                                 |
                      Luminary Auth Gateway
                                 |
@@ -50,6 +52,30 @@ Auth Gateway → IdP  →  JWT（身份）
 
 产品消费统一 `LuminaryPrincipal`，外部身份键是 `issuer + subject`。Management API 的 M2M 凭据不得放入产品 `.env`、产品后端或浏览器。暂未实际接入的 Provider 不建立空 adapter；缺失能力必须显式返回 unsupported。
 
+## 选择 IAM（`IAM_PROVIDER`）
+
+运维/部署用目录开关选择插件；产品代码只认 Adapter。
+
+| `IAM_PROVIDER` | 登录 | 后端 | 中央 Management | 何时用 |
+|----------------|------|------|-----------------|--------|
+| `logto`（默认） | Experience Headless | Logto JWKS | 已交付 | SaaS / 默认自托管 |
+| `oidc` | Hosted Redirect | 标准 OIDC | 不支持 | 私有化直连客户 IdP |
+| `zitadel` | Hosted Redirect | 标准 OIDC | **未交付** | 客户将来要 Delegated Admin / Brokering 时再上插件 |
+
+SPA：`VITE_IAM_PROVIDER`。后端：`IAM_PROVIDER` 或旧变量 `IDP_MODE`（前者优先）。Gateway：只改 `UPSTREAM_ISSUER`。
+
+```bash
+# 默认（可省略）
+IAM_PROVIDER=logto
+VITE_IAM_PROVIDER=logto
+
+# 企业私有化：客户自己的 OIDC
+IAM_PROVIDER=oidc
+IDP_ISSUER=https://login.customer.example/…
+```
+
+验收：`pnpm verify:iam`（catalog 单测 + Playwright Headless/Hosted 面板 + 本地 Logto discovery）；产品登录回归 `pnpm verify:login`。
+
 ## 启动本地 IdP
 
 ```bash
@@ -72,6 +98,12 @@ pnpm auth:gateway   # http://localhost:3010/oidc
 Identity 容器为 `restart: unless-stopped`：Docker Desktop 启动后会自动拉起。
 
 ## 全产品登录验证
+
+Adapter 选型与 Headless/Hosted 面板：
+
+```bash
+pnpm verify:iam
+```
 
 Playwright 验证覆盖 DataLuminary、BlockyEdu LMS/Code、DoerFlow Web/Admin、VistaCast、VistaRemote Client/Admin 与 SyncroBrain：
 
@@ -103,12 +135,14 @@ VITE_IDP_ISSUER=http://localhost:3001/oidc
 VITE_IDP_CLIENT_ID=<registered-apps.json 对应 ID>
 VITE_IDP_REDIRECT_URI=http://localhost:<port>/auth/callback
 VITE_ALLOW_LOCAL_LOGIN=false
+# 可选：logto（默认 Headless）| oidc | zitadel（Hosted）
+# VITE_IAM_PROVIDER=logto
 ```
 
 ## 登录体验 Adapter
 
-- **当前 Logto**：`LogtoExperienceAdapter` / `@luminaryworks/auth-react`（OIDC PKCE）做注册、登录、找回、MFA、SSO。
-- **通用企业 OIDC**：优先 Hosted Redirect；只有 Provider 提供稳定 Headless API 时才增加对应 adapter。
+- **当前 Logto**：`createLoginExperienceAdapter("logto")` / `@luminaryworks/auth-react`（OIDC PKCE）做注册、登录、找回、MFA、SSO。
+- **`oidc` / 预留 `zitadel`**：`HostedOidcExperienceAdapter`（Hosted Redirect）；不要为空的 ZITADEL Experience API 做 stub。
 - **不用**：Management API 给前端；不要 fork Logto `packages/experience`。
 - **Auth Gateway**：换 IdP 只改 `UPSTREAM_ISSUER`。见 [Auth Gateway](./auth-gateway)。
 
@@ -143,7 +177,8 @@ import { LuminaryAuthModule, LuminaryJwtAuthGuard } from "@luminaryworks/auth-co
 @Module({
   imports: [
     LuminaryAuthModule.forRootAsync({
-      mode: process.env.IDP_ISSUER ? "logto" : "legacy",
+      mode: process.env.IDP_MODE ?? (process.env.IDP_ISSUER ? "logto" : "legacy"),
+      iamProvider: process.env.IAM_PROVIDER,
       issuer: process.env.IDP_ISSUER,
       audience: process.env.IDP_AUDIENCE,
     }),
@@ -158,6 +193,7 @@ export class AppModule {}
 IDP_ISSUER=http://localhost:3001/oidc
 IDP_AUDIENCE=https://api.<product>.local
 AUTH_MODE=sso
+IAM_PROVIDER=logto
 # 可选：经 Gateway 拉 JWKS
 # IDP_JWKS_URI=http://localhost:3010/oidc/jwks
 ```
@@ -189,8 +225,9 @@ DoerFlow 双身份：Logto 管平台会话；wallet/SIWE 管链上证明。无 T
 | 模式 | 配置 |
 |------|------|
 | 自托管 Logto | identity compose；Gateway `UPSTREAM_ISSUER` 指向客户 Logto |
-| 企业 OIDC（Azure AD / Okta / 蓝鲸 / IDaaS） | Gateway upstream 或 `IDP_MODE=external_oidc` + 企业 issuer |
-| SAML / LDAP / AD | 在 Logto（或企业 IdP）配 Connector；**产品零改动** |
+| 企业 OIDC（Azure AD / Okta / 蓝鲸 / IDaaS） | `IAM_PROVIDER=oidc` + Gateway upstream 或 `IDP_MODE=external_oidc` |
+| 预留 ZITADEL | 仅当合同需要复杂 Delegated Admin / Brokering；登录可先走 Hosted OIDC，Management 插件未交付 |
+| SAML / LDAP / AD | 在 **当前 IdP**（默认 Logto）配 Connector；**产品零改动** |
 
 关闭产品本地账密：前端 `VITE_ALLOW_LOCAL_LOGIN=false`，后端 `AUTH_MODE=sso`。
 
@@ -207,3 +244,4 @@ DoerFlow 双身份：Logto 管平台会话；wallet/SIWE 管链上证明。无 T
 | [通知模块](./notification) | 业务邮件；注册/找回/MFA 仍归 IdP |
 | [接入矩阵](./onboarding) | 六产品仓库与本地布局 |
 | MetaRepo IAM 规格 | `spec/identity-and-permissions.md` |
+| Provider 选型（已冻结） | `spec/iam-provider-selection.md` |

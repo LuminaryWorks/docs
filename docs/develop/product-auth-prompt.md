@@ -14,12 +14,12 @@ Implement LuminaryWorks unified login and product authorization for **this** pro
 ## Spec (must follow)
 
 1. Read and follow skill: `LuminaryWorks/.cursor/skills/product-auth-implementation/SKILL.md` (also under this repo `.cursor/skills/product-auth-implementation/` if present).
-2. Architecture decisions: `LuminaryWorks/spec/identity-and-permissions.md`
+2. Architecture decisions: `LuminaryWorks/spec/identity-and-permissions.md` and frozen provider choice `LuminaryWorks/spec/iam-provider-selection.md`
 3. Developer guide: [unified-login](./unified-login)
 
 ## Decisions already made
 
-- **AuthN**: Luminary IAM Adapter. Logto is the current default IdP (`IDP_ISSUER=http://localhost:3001/oidc` locally). Enterprise private deploy may use `external_oidc`.
+- **AuthN**: Luminary IAM Adapter. **Default IdP is Logto** (frozen; do not re-evaluate vs ZITADEL). Local issuer `IDP_ISSUER=http://localhost:3001/oidc`. Choose plugin with `IAM_PROVIDER=logto|oidc|zitadel`. Enterprise private deploy may use `oidc`. ZITADEL is a reserved plugin.
 - **Login UI**: `LoginExperienceAdapter` + OIDC PKCE via `@luminaryworks/auth-react`. Logto defaults to Experience Headless; providers without Headless use Hosted Redirect. No IdP Experience fork. No Management API in browser or product services.
 - **Identity key**: map `issuer + sub` → local `user_id` (existing `logtoSub` columns are compatibility names).
 - **AuthZ**: **Casbin** in this product. JWT / `LuminaryPrincipal` carries identity + platform access only — not resource ACL or commercial entitlements.

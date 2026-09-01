@@ -15,7 +15,7 @@ AI 数据洞察平台：空间化数据集管理、DataTalk 可视化大屏、�
 | **DataView** | 前端可视化编辑器，拖拽式大屏搭建与主题定制 |
 | **数据源插件** | 支持 PostgreSQL、MySQL（外部库）、Excel 导入等；`kind` 与 TypeORM 驱动对齐 |
 | **权限 (PAL)** | `space` / `dashboard` / `dataset` / `datasource` 等资源级 `resource:action` |
-| **统一登录** | **默认** LuminaryWorks 统一账号（OIDC）；经 Auth Gateway，可接企业 SSO；DataView 主 CTA 为统一登录，本地账密仅开发回退 |
+| **统一登录** | **默认** LuminaryWorks 统一账号（OIDC / Logto）；经 Auth Gateway，可接企业 SSO；DataView 主 CTA 为统一登录，本地账密仅开发回退 |
 | **订阅推送邮件** | DataTalk 报表订阅经 `@luminaryworks/notification` 投递（见 [通知模块](/develop/notification)） |
 | **DataInsight（AI）** | 统一对话框：问数、可解释洞察、ChartIntent 生成原生图表 / 仪表盘；Pro feature `ai.analysis`；空间 BYOK（见 [AI 平台](/develop/ai-platform)） |
 

@@ -3,7 +3,7 @@
 产品**不要**直接依赖某一家 IdP 的 Management API。浏览器与 SPA 统一经 **Auth Gateway** 访问可达的 OIDC / Experience 端点；换 IdP 只改 Gateway `UPSTREAM_ISSUER`。
 
 ```text
-              Logto | Keycloak | Entra ID | 企业 OIDC
+              Logto | ZITADEL（预留）| Keycloak | Entra ID | 企业 OIDC
                                 |
                      Luminary Auth Gateway  (:3010)
                                 |
@@ -102,4 +102,5 @@ AUTH_MODE=sso
 ## 与统一登录文档的关系
 
 接入步骤、IAM Adapter、Casbin、全产品 Playwright 验证见 [统一登录](./unified-login)。  
-IAM 决策见 MetaRepo [`spec/identity-and-permissions.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/identity-and-permissions.md)。
+IAM 决策见 MetaRepo [`spec/identity-and-permissions.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/identity-and-permissions.md)。  
+**默认 IdP 已冻结为 Logto**；ZITADEL 是预留插件，不要再重评。见 [`spec/iam-provider-selection.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/iam-provider-selection.md)。

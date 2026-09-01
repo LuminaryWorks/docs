@@ -254,7 +254,7 @@ FutureProducts → NotificationService -.future.→ RemoteClient(IndependentServ
 | 文档 | 说明 |
 |------|------|
 | [共享库 @luminaryworks/*](./shared-packages) | 包清单与安装方式 |
-| [统一登录](./unified-login) | 认证邮件归 Logto，与本模块边界分离 |
+| [统一登录](./unified-login) | 认证邮件归当前 IdP（默认 Logto），与本模块边界分离 |
 | [接入矩阵](./onboarding) | 六产品与公共能力 |
 | [总体架构](/guide/architecture) | 共享服务层位置 |
 | MetaRepo 规格 | [`spec/notification-service.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/notification-service.md) |
