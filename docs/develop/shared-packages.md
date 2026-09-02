@@ -30,8 +30,8 @@ engine-strict=true
 ```
 
 ```bash
-pnpm add @luminaryworks/auth-core@^0.2.3
-pnpm add @luminaryworks/auth-react@^0.4.1
+pnpm add @luminaryworks/auth-core@^0.2.4
+pnpm add @luminaryworks/auth-react@^0.4.2
 pnpm add @luminaryworks/notification@^0.2.0
 ```
 
