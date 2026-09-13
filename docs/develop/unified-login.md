@@ -122,7 +122,7 @@ pnpm verify:login:strict
 - **主 CTA**：统一账号 / 企业 SSO（OIDC PKCE）。
 - **本地账密**：仅开发折叠入口（`VITE_ALLOW_LOCAL_LOGIN`）；生产与可售私有化包关闭。
 - **回调**：优先 path `/auth/callback`（即使 SPA 用 HashRouter，也应在该 path 挂载回调页）。
-- **品牌**：Logo / 主色 / 文案按产品定制；认证逻辑共用 SDK。
+- **品牌**：Logo / 文案按产品定制；主色统一品牌蓝 `#1677ff`；认证逻辑共用 SDK。
 
 前端环境变量：
 
