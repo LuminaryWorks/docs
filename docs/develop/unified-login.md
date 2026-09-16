@@ -169,6 +169,39 @@ import { HeadlessLoginPanel } from "@luminaryworks/auth-react";
 
 产品面向终端用户的登录页保持默认 `true`；仅运营/Admin SPA 设为 `false`。企业 SSO（SAML/OIDC Connector）仍在 IdP 侧配置，与本开关无关。
 
+### 自助注册（可关）与进入平台路径
+
+`HeadlessLoginPanel` 默认提供「注册」切换（Logto Experience `Register` + username/password）。**管理后台 / 超管控制台必须关闭**：
+
+```tsx
+<HeadlessLoginPanel
+  config={idp}
+  productName="DoerFlow Admin"
+  showRegister={false}
+  showSocialConnectors={false}
+  mode="redirect"
+/>
+```
+
+| Prop | 默认 | 说明 |
+|------|------|------|
+| `showRegister` | `true` | `false` 时隐藏注册入口（Admin / Console） |
+| `showSocialConnectors` | `true` | 见上一节 |
+
+**Headless 注册标识**：Logto `NewPasswordIdentity` 仅支持 **username**（字母/下划线开头）。邮箱自助注册需验证码，本期用社交登录或邀请覆盖；登录仍可用邮箱或用户名。
+
+**用户如何进入平台（三形态 × 四路径）**
+
+| 形态 | App 自助注册 | 组织/租户 | Admin |
+|------|--------------|-----------|-------|
+| ToC 公网运营 | 开 | SSO upsert + 默认组织/空间；协作用邀请 | 关 |
+| SaaS ToB | 开（或租户强制 SSO） | 邀请 / 管理员导入 / SCIM / SSO JIT | 关 |
+| 企业私有化 | 可用 `VITE_ALLOW_SELF_REGISTER` / `PUBLIC_ALLOW_SELF_REGISTER` 关 | 首管 / 邀请 / 导入 / 企业 IdP | 关 |
+
+路径：① 自助注册 ② 邀请链接（先注册/登录再接受）③ 中心 Management 导入（禁止产品持有 M2M 密钥）④ 企业 SSO JIT。统一账号注册一次；产品权限仍在 Casbin / membership。
+
+IdP：`identity/scripts/ensure-sign-in-experience.mjs` 启用 `signUp.identifiers=["username"]` + password。
+
 ## 后端接入（NestJS）
 
 ```ts
