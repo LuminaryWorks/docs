@@ -200,7 +200,35 @@ import { HeadlessLoginPanel } from "@luminaryworks/auth-react";
 
 路径：① 自助注册 ② 邀请链接（先注册/登录再接受）③ 中心 Management 导入（禁止产品持有 M2M 密钥）④ 企业 SSO JIT。统一账号注册一次；产品权限仍在 Casbin / membership。
 
-IdP：`identity/scripts/ensure-sign-in-experience.mjs` 启用 `signUp.identifiers=["username"]` + password。
+IdP：`identity/scripts/ensure-sign-in-experience.mjs` 启用 username；若已配置 Email Connector 则同时启用 email + verify。
+
+### 注册风控（邮箱范围 / IP 限额 / 其它）
+
+前期 ToC **建议开启邮箱域名 allowlist**（有意义）：挡一次性邮箱、游戏邮箱、脚本批量注册，降低验证码邮件与垃圾账号成本。
+
+**改配置（推荐，不用改代码）**：编辑 [`identity/register-email-policy.json`](https://github.com/LuminaryWorks/LuminaryWorks/blob/dev/identity/register-email-policy.json)（说明见同目录 [`register-email-policy.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/dev/identity/register-email-policy.md)）。
+
+| `mode` | 效果 |
+|--------|------|
+| `allowlist`（默认） | 仅 allowlist 内域名 |
+| `blocklist` | 除 blocklist 外均可 |
+| `off` | 不限常见邮箱；仍拒 disposable（除非 `blocklist: []`） |
+
+**默认允许的消费邮箱域名**：`gmail.com`、`googlemail.com`、`qq.com`、`foxmail.com`、`163.com`、`126.com`、`yeah.net`、`outlook.com`、`hotmail.com`、`live.com`、`msn.com`、`icloud.com`、`me.com`、`mac.com`、`yahoo.com`、`yahoo.co.jp`、`proton.me`、`protonmail.com`、`sina.com`、`sina.cn`、`aliyun.com`、`139.com`。
+
+追加公司域：在 JSON 的 `allowlist` 数组里加 `"acme.com"` 即可。Auth Gateway 提供 `GET /api/register-policy`；登录面板默认会拉取（改 JSON 后前端无需重打包）。环境变量 `AUTH_REGISTER_EMAIL_*` / IP 限额若设置则覆盖文件。
+
+| 手段 | 落点 | 默认 |
+|------|------|------|
+| 邮箱域名 allowlist | 策略文件 + Gateway 强制 + 登录页拉取 | 开 |
+| 一次性邮箱 blocklist | 同上 | 开 |
+| 同 IP 日注册上限 | Auth Gateway | **5**/IP/天 |
+| 同 IP 验证码小时上限 | Auth Gateway | **10**/IP/小时 |
+| 邮箱验证码 | Experience + Email Connector | 有 connector 时启用 |
+| CAPTCHA（Turnstile / reCAPTCHA） | Logto + `getCaptchaToken` | 运维开启 |
+| Cloudflare WAF | 边缘 | 生产建议开 |
+
+本地若只走 `auth-dev-proxy` 直连 Logto，**IP 限额不生效**——生产请经 Auth Gateway。
 
 ## 后端接入（NestJS）
 
