@@ -3,6 +3,11 @@ import rehypeExternalLinks from "rehype-external-links";
 import { defineConfig } from "rspress/config";
 
 export default defineConfig({
+  head: [
+    ["meta", { name: "robots", content: "noai, noimageai, noarchive" }],
+    ["meta", { name: "tdm-reservation", content: "1" }],
+    ["meta", { name: "tdm-policy", content: "https://docs.luminaryworks.dev/legal/ai-use" }],
+  ],
   root: "docs",
   title: "LuminaryWorks · 启明工坊",
   description: "AI 原生开源生态 — 学 · 连 · 看 · 视 · 控 · 赚",
@@ -76,7 +81,7 @@ export default defineConfig({
       ],
     },
     footer: {
-      message: "LuminaryWorks · 启明工坊 · AI 原生开源生态",
+      message: "LuminaryWorks · 启明工坊 · 公开阅读 · 禁止用于 AI 训练或生成同类产品（/legal/ai-use）",
     },
   },
 });

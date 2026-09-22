@@ -6,7 +6,7 @@
   "description": "LuminaryWorks ecosystem marketing & developer portal (RsPress)",
   "scripts": {
     "dev": "rspress dev",
-    "build": "rspress build",
+    "build": "rspress build && node scripts/publish-ai-reservation.mjs",
     "preview": "rspress preview"
   },
   "devDependencies": {
