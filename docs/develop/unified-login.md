@@ -204,15 +204,15 @@ IdP：`identity/scripts/ensure-sign-in-experience.mjs` 启用 username；若已�
 
 ### 注册风控（邮箱范围 / IP 限额 / 其它）
 
-前期 ToC **建议开启邮箱域名 allowlist**（有意义）：挡一次性邮箱、游戏邮箱、脚本批量注册，降低验证码邮件与垃圾账号成本。
+默认只校验邮箱格式和字段长度。私有化若要收紧域名，把 `mode` 设为 `allowlist`。
 
 **改配置（推荐，不用改代码）**：编辑 [`identity/register-email-policy.json`](https://github.com/LuminaryWorks/LuminaryWorks/blob/dev/identity/register-email-policy.json)（说明见同目录 [`register-email-policy.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/dev/identity/register-email-policy.md)）。
 
 | `mode` | 效果 |
 |--------|------|
-| `allowlist`（默认） | 仅 allowlist 内域名 |
-| `blocklist` | 除 blocklist 外均可 |
-| `off` | 不限常见邮箱；仍拒 disposable（除非 `blocklist: []`） |
+| `off`（默认） | 邮箱格式即可（6–64 个字符） |
+| `allowlist` | 仅 allowlist 内域名 |
+| `blocklist` | 与 `off` 相同 |
 
 **默认允许的消费邮箱域名**：`gmail.com`、`googlemail.com`、`qq.com`、`foxmail.com`、`163.com`、`126.com`、`yeah.net`、`outlook.com`、`hotmail.com`、`live.com`、`msn.com`、`icloud.com`、`me.com`、`mac.com`、`yahoo.com`、`yahoo.co.jp`、`proton.me`、`protonmail.com`、`sina.com`、`sina.cn`、`aliyun.com`、`139.com`。
 
@@ -220,8 +220,8 @@ IdP：`identity/scripts/ensure-sign-in-experience.mjs` 启用 username；若已�
 
 | 手段 | 落点 | 默认 |
 |------|------|------|
-| 邮箱域名 allowlist | 策略文件 + Gateway 强制 + 登录页拉取 | 开 |
-| 一次性邮箱 blocklist | 同上 | 开 |
+| 邮箱格式与长度 | 登录卡片 + Auth Gateway | 开（6–64） |
+| 邮箱域名 allowlist | 策略文件 + Gateway；默认关闭 | 关 |
 | 同 IP 日注册上限 | Auth Gateway | **5**/IP/天 |
 | 同 IP 验证码小时上限 | Auth Gateway | **10**/IP/小时 |
 | 邮箱验证码 | Experience + Email Connector | 有 connector 时启用 |
