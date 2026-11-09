@@ -3,3 +3,6 @@ doc_build/
 .rspress/
 package-lock.json
 *.log
+
+# Local AI provider secrets — never commit
+.env.ai
