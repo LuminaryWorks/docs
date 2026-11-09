@@ -18,7 +18,7 @@ hero:
 
 features:
   - title: 创造到产业的一条价值链
-    details: 从 BlockyEdu 的 AI 全民创造与学中创起步（网站 / 小程序 / 标准玩具），并以 VibeLearn 为企业提供知鸟类私有化内部培训；再经 SyncroBrain 接入设备、DataLuminary 洞察数据，延伸到 VistaCast、VistaRemote 与 DoerFlow。
+    details: 从 BlockyEdu 的 AI 全民创造与学中创起步（网站 / 小程序 / 标准玩具），并以 VibeLearn 为企业提供知鸟类私有化内部培训；再经 SyncroBrain 接入设备、DataLuminary 洞察数据。VistaCast 用固定摄像头做客流、安防和产线 AOI，VistaRemote 负责远程上手，DoerFlow 负责调用与结算。
     icon: ✨
   - title: 六个产品，独立商业化也能协同
     details: 每个产品都可单独融资、部署与售卖；同时通过统一身份、共享组件与标准协议拼成完整生态。

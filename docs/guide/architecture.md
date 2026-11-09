@@ -1,66 +1,52 @@
 # 总体架构
 
-在六产品**完全独立部署**前提下，提供可选集成层与共享服务。**VistaCast**（AI 摄像头）与 **VistaRemote**（WebRTC 远程桌面）为两条独立视觉产品线，可单独商业化，也可按场景组合。
+六个产品可以各买各的，也可以接成一条业务。接在一起之后，员工仍用一套账号；门店的画面、设备的遥测、课程的学员、远程会话和结算账本，各自留在原来的产品里。
 
-## 分层模型
+这样设计，是为了三件事同时成立：只买一个产品就能上线；几个产品一起用时不用合并成一个数据库；你们自己的身份系统、内网和离线许可可以接进来。
 
-```text
-┌──────────────────────────────────────────────────────────────────┐
-│  体验层（各产品独立前端）                                            │
-│  DataView/DataTalk · edu-app · DoerFlow Web · VistaCast Admin     │
-│  VistaRemote Client/Admin · iot-console-web                        │
-├──────────────────────────────────────────────────────────────────┤
-│  业务层（各产品独立后端 / 独立 Git）                                 │
-│  DataTalk · VibeEdu server · DoerFlow api · VistaCast API          │
-│  VistaRemote server · iot-gateway · ThingsBoard CE                 │
-├──────────────────────────────────────────────────────────────────┤
-│  LuminaryWorks 共享服务层                                           │
-│  Identity · Auth Gateway · auth-* · pal · notification · entitlement · AI Platform │
-├──────────────────────────────────────────────────────────────────┤
-│  行业协议层                                                         │
-│  OIDC/JWT · MQTT/EMQX · ONVIF/RTSP · WebRTC · REST/OpenAPI        │
-├──────────────────────────────────────────────────────────────────┤
-│  基础设施（按产品选型）                                              │
-│  PostgreSQL · Redis · ClickHouse · MinIO · K8s                    │
-└──────────────────────────────────────────────────────────────────┘
-```
+## 使用时能感觉到的三层
 
-## VistaCast vs VistaRemote
+| 你遇到的事 | 由谁负责 | 对你意味着什么 |
+|------------|----------|----------------|
+| 这个人是谁，用哪套公司账号登录 | 统一身份。默认是 LuminaryWorks 账号，也可以换成你们的企业身份系统 | 换登录系统时，产品本身不用重做 |
+| 购买了哪一档、还有多少额度 | 权益服务。私有化时也可以用离线许可 | 升降套餐不用重新给所有人发登录凭证 |
+| 能看哪块看板、哪台设备、哪次会话 | 每个产品自己的权限 | 买了套餐，仍可以按场地、班级或空间分开授权 |
 
-| | VistaCast | VistaRemote |
-|---|-----------|-------------|
-| 协议 | ONVIF / RTSP | WebRTC |
-| 输入 | 固定摄像头 | 远程桌面 |
-| 价值 | AI 自动感知与告警 | 人工远程操作与审计 |
+## 数据留在该留的地方
 
-## 架构原则
+| 你在看的内容 | 以谁的记录为准 |
+|--------------|----------------|
+| 客流、告警、工位质检和证据图片 | VistaCast |
+| 设备、遥测、告警处理和下发到设备的命令 | SyncroBrain |
+| 远程会话、录制和审计 | VistaRemote |
+| 报表、看板和导出 | DataLuminary |
+| 课程、演练和学员进度 | BlockyEdu |
+| 调用记录、任务和结算 | DoerFlow |
 
-| 原则 | 说明 |
-|------|------|
-| 产品可独立部署 | 每个产品都有完整交付边界，可单独私有化与商业化 |
-| 共享不耦合 | 仅通过发布的 `@luminaryworks/*`、OIDC 与标准协议协作 |
-| 无跨产品数据库绑定 | 用用户主体、设备 ID、API 与事件关联 |
-| 协议优先 | 便于替换、扩展与企业 IdP / 既有系统对接 |
+其他产品可以展示这些结果，用来做看板或派工。改一处展示，不会改掉源头的那条记录。
 
-## 共享能力
+## 可以怎么部署
 
-| 能力 | 作用 |
-|------|------|
-| 统一身份 Identity | 中央 IAM Adapter，**默认 Logto**（选型已冻结）；ZITADEL 为预留插件 |
-| **Auth Gateway** | OIDC 反代；产品不直绑 IdP 厂商，换 Logto / 企业 OIDC / 预留 ZITADEL 只改 upstream |
-| auth-core / auth-react | 后端 JWKS 验签与前端 OIDC PKCE |
-| Casbin（各产品） | 资源级 AuthZ；JWT 不塞业务 ACL |
-| Entitlement | 中央商业权益（Trial / 套餐 / License）；不进 JWT |
-| PAL 权限层 | 可插拔 `resource:action` 抽象，可对接 Casbin |
-| notification | 平台 NotificationModule（一期 Email / SMTP） |
-| 工程基线 tooling | 统一代码质量与 TypeScript 基线 |
+| 你的情况 | 建议 |
+|----------|------|
+| 只需要其中一个产品 | 单独部署。它有自己的数据库，不依赖其余五个 |
+| 希望全公司一套登录和套餐 | 再加上 LuminaryWorks 的身份和权益 |
+| 现场要从「看见」走到「派人处理」再看到报表 | VistaCast、SyncroBrain、DoerFlow，需要时加上 VistaRemote 和 DataLuminary |
+| 机房不能出网 | 单品或上面的组合都可以放在内网。模型密钥留在本地，套餐用离线许可 |
 
-```text
-AuthN: Auth Gateway → IdP (Logto / 企业 SSO)
-Entitlement: 中央权益服务（商业能力）
-AuthZ: 产品 Casbin PermissionService（资源 ACL）
-```
+身份服务暂时不可用时，系统会拒绝访问，而不是让人匿名进去。模型和通知可以关掉。一个产品停机，不会把其他产品的数据卷走。
 
-详情：[统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification) · MetaRepo [`spec/identity-and-permissions.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/identity-and-permissions.md) · 选型冻结 [`spec/iam-provider-selection.md`](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/iam-provider-selection.md)。
+## 和常见做法相比
 
-这套架构让生态既能形成完整价值链，又不牺牲各产品独立融资、独立交付与独立演进的能力。
+| | 做成一个大系统 | 锁在一家行业云里 | LuminaryWorks |
+|--|----------------|------------------|---------------|
+| 采购 | 往往要整包 | 账号和硬件绑在一起 | 需要哪个产品就部署哪个 |
+| 数据 | 容易进同一张大表 | 画面和学员数据进厂商云 | 业务数据留在对应产品里 |
+| 登录 | 一套角色打通所有按钮 | 很难换成你们的公司账号 | 可以用你们的身份系统 |
+| 故障 | 一处库出问题，整体受影响 | 厂商区域故障即停 | 每个产品自己升级、自己备份 |
+
+## 摄像头和远程桌面
+
+VistaCast 使用已经安装的固定摄像头，做客流、安防和产线外观。VistaRemote 连接的是电脑桌面，用来远程操作和留下会话记录。两套产品可以配合：先由摄像头发现情况，再由人远程上去处理。
+
+实施和开发细节见 [技术接入概览](/develop/getting-started)、[统一登录](/develop/unified-login) 和 [AI 平台](/develop/ai-platform)。

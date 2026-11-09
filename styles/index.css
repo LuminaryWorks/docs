@@ -8,6 +8,10 @@
   --lw-home-surface-strong: rgba(255, 255, 255, 0.88);
   --lw-home-border: rgba(22, 119, 255, 0.12);
   --lw-home-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+  /* 首页各行卡片共用同一内容边距与间距，保证 3/4/6 列左右对齐 */
+  --lw-home-pad-x: 1.5rem;
+  --lw-home-gap: 1rem;
+  --lw-home-max: 72rem;
 }
 
 /* Hero 渐变标题 */
@@ -25,53 +29,118 @@
   letter-spacing: -0.01em;
 }
 
-/* 背景光晕 */
-.rspress-home-hero {
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 2rem;
+/*
+ * Hero 间距：Rspress 默认 md:pt-16/pb-16 + min-h-[50vh] 会把 banner
+ * 撑得很高，和下方卡片脱节。用 :has 覆盖默认类，不改 theme 源码。
+ */
+div.relative.m-auto:has(.rspress-home-hero-text) {
+  padding-top: 1rem !important;
+  padding-bottom: 0.5rem !important;
 }
 
-.rspress-home-hero > * {
-  position: relative;
-  z-index: 1;
+@media (min-width: 640px) {
+  div.relative.m-auto:has(.rspress-home-hero-text) {
+    padding-top: 1.5rem !important;
+    padding-bottom: 0.75rem !important;
+  }
 }
 
-.rspress-home-hero::before {
+@media (min-width: 768px) {
+  div.relative.m-auto:has(.rspress-home-hero-text) {
+    padding-top: 1.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+}
+
+div.max-w-6xl.flex:has(.rspress-home-hero-text) {
+  min-height: 0 !important;
+  margin-top: 0 !important;
+}
+
+.rspress-home-hero-tagline {
+  padding-top: 0.75rem !important;
+}
+
+div.relative.m-auto:has(.rspress-home-hero-text) .pt-6 {
+  padding-top: 1rem !important;
+}
+
+@media (min-width: 640px) {
+  div.relative.m-auto:has(.rspress-home-hero-text) .sm\:pt-8 {
+    padding-top: 1.25rem !important;
+  }
+}
+
+/* 背景光晕（挂在 hero 根节点；勿强制改子节点 position，避免打乱 Rspress mask） */
+div.relative.m-auto:has(.rspress-home-hero-text)::before {
   content: "";
   position: absolute;
-  top: -30%;
+  top: -40%;
   left: 50%;
-  width: 60rem;
-  height: 60rem;
+  width: 48rem;
+  height: 48rem;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(22, 119, 255, 0.18) 0%, rgba(22, 119, 255, 0) 60%);
+  background: radial-gradient(circle, rgba(22, 119, 255, 0.16) 0%, rgba(22, 119, 255, 0) 62%);
   pointer-events: none;
   z-index: 0;
 }
 
-.rspress-home-hero::after {
-  content: "";
-  position: absolute;
-  inset: auto -10% -6rem;
-  height: 12rem;
-  background: linear-gradient(180deg, rgba(22, 119, 255, 0) 0%, rgba(24, 160, 251, 0.08) 100%);
-  filter: blur(16px);
-  pointer-events: none;
+/*
+ * 三卡片（Rspress features）与下方 stats / flow / products / why 共用同一内容框：
+ * max-width + pad-x + gap。去掉主题自带的 p-2 内边距与 33% flex 宽，改成等分 grid。
+ */
+div.max-w-6xl.m-auto.flex.flex-wrap.overflow-hidden:has(.rspress-home-feature-card) {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--lw-home-gap);
+  width: 100%;
+  max-width: var(--lw-home-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--lw-home-pad-x);
+  box-sizing: border-box;
+  overflow: visible;
 }
 
-/* 能力卡片 hover 提升 */
+div.max-w-6xl.m-auto.flex.flex-wrap.overflow-hidden:has(.rspress-home-feature-card) > * {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0;
+}
+
+div.max-w-6xl.m-auto.flex.flex-wrap.overflow-hidden:has(.rspress-home-feature-card) .p-2 {
+  padding: 0 !important;
+  height: 100%;
+}
+
+@media (max-width: 959px) {
+  div.max-w-6xl.m-auto.flex.flex-wrap.overflow-hidden:has(.rspress-home-feature-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  div.max-w-6xl.m-auto.flex.flex-wrap.overflow-hidden:has(.rspress-home-feature-card) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 能力卡片：圆角/阴影与下方 lw-home-* 卡片统一，避免视觉“胀出” */
 .rspress-home-feature-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   border: 1px solid var(--lw-home-border);
   background: var(--lw-home-surface);
   backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  box-shadow: var(--lw-home-shadow);
+  border-radius: 22px !important;
+  padding: 1.25rem !important;
+  height: 100%;
+  box-sizing: border-box;
 }
 .rspress-home-feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(22, 119, 255, 0.16);
-  border-color: var(--rp-c-brand-light);
+  box-shadow: 0 18px 48px rgba(22, 119, 255, 0.12);
+  border-color: rgba(22, 119, 255, 0.3);
 }
 
 /* 主按钮渐变 */
@@ -87,11 +156,12 @@
 }
 
 .lw-home-sections {
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
-  max-width: 72rem;
+  max-width: var(--lw-home-max);
   margin: 0 auto;
-  padding: 0 1.5rem 4rem;
+  padding: 0.75rem var(--lw-home-pad-x) 4rem;
+  box-sizing: border-box;
 }
 
 .lw-home-heading {
@@ -114,7 +184,7 @@
 .lw-home-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--lw-home-gap);
   margin: 0 0 2.5rem;
 }
 
@@ -133,7 +203,7 @@
   flex-direction: column;
   gap: 0.35rem;
   padding: 1.1rem 1.2rem;
-  border-radius: 20px;
+  border-radius: 22px;
   text-align: center;
 }
 
@@ -263,7 +333,7 @@
 .lw-home-why {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--lw-home-gap);
   margin: 1.25rem 0 2.5rem;
 }
 
@@ -327,8 +397,9 @@
     grid-template-columns: 1fr;
   }
 
-  .rspress-home-hero {
-    padding-bottom: 1rem;
+  div.relative.m-auto:has(.rspress-home-hero-text) {
+    padding-top: 1rem !important;
+    padding-bottom: 0.5rem !important;
   }
 }
 

@@ -3,57 +3,47 @@
 ![DataLuminary](/brand/dataluminary-logo.svg)
 
 
-> 角色 **看** · 组织 [dataluminary](https://github.com/dataluminary) · 官网 [dataluminary.dev](https://dataluminary.dev) · MetaRepo [DataLuminary-Platform](https://github.com/dataluminary/DataLuminary-Platform)
+> 角色 **看** · 组织 [dataluminary](https://github.com/dataluminary) · 官网 [dataluminary.dev](https://dataluminary.dev)
 
-AI 数据洞察平台：空间化数据集管理、DataTalk 可视化大屏、细粒度权限与 AI 辅助分析。可单独商用于企业 BI、运营监控、IoT 遥测看板等场景。
+把散落在表格、业务库和现场系统里的数字，放成一块能看、能问、能发出去的看板。
 
-## 核心能力
+DataLuminary 可以单独用于经营分析，也可以把设备、客流、远程运维和培训进度接到同一张图上。看的是结果。设备怎么控制、一笔账怎么结算，仍由原来的系统负责。
 
-| 模块 | 说明 |
-|------|------|
-| **DataTalk** | NestJS 后端 + 大屏编排：空间、仪表盘、图表面板、数据集、数据源 |
-| **DataView** | 前端可视化编辑器，拖拽式大屏搭建与主题定制 |
-| **数据源插件** | 支持 PostgreSQL、MySQL（外部库）、Excel 导入等；`kind` 与 TypeORM 驱动对齐 |
-| **权限 (PAL)** | `space` / `dashboard` / `dataset` / `datasource` 等资源级 `resource:action` |
-| **统一登录** | **默认** LuminaryWorks 统一账号（OIDC / Logto）；经 Auth Gateway，可接企业 SSO；DataView 主 CTA 为统一登录，本地账密仅开发回退 |
-| **订阅推送邮件** | DataTalk 报表订阅经 `@luminaryworks/notification` 投递（见 [通知模块](/develop/notification)） |
-| **DataInsight（AI）** | 统一对话框：问数、可解释洞察、ChartIntent 生成原生图表 / 仪表盘；Pro feature `ai.analysis`；空间 BYOK（见 [AI 平台](/develop/ai-platform)） |
+## 三种用法
 
-## 技术栈
+### 把经营数字做成一块屏
 
-- **OLTP**：PostgreSQL（平台主库，TypeORM migrations）
-- **后端**：NestJS + Fastify + TypeORM
-- **前端**：React + 自研图表引擎
-- **共享库**：`@luminaryworks/auth-core`、`@luminaryworks/pal`、`@luminaryworks/notification`（[LuminaryWorks/shared](https://github.com/LuminaryWorks/shared)）
+空间里管理数据集和看板。图表拖进画面，换上自己的主题，投到会议室或门店后台。报表可以按周期发到邮箱，不必每天有人登录去导出。
 
-为何平台 OLTP 用 PostgreSQL（而非 MySQL）：见 [数据存储策略](/develop/datastore)。
+### 把现场放进同一张图
 
-## 在生态中
+设备曲线、客流、告警、远程会话摘要、调用量和学情，都可以作为数据源接进来。管理层看一块屏，现场同事仍在各自的系统里处理。
 
-- 设备遥测、远程录制、Agent 运行日志的**统一图表层**
-- SyncroBrain 控制台可嵌入 DataTalk 大屏
-- 与生态共享认证、权限组件，降低多产品接入成本
+### 用一句话问出一张图
 
-## 典型集成
+对着自己的数据提问，得到说明和可以直接放上看板的图表。模型密钥可以放在你们自己的环境里。能提问，不表示能看见每一个空间，空间仍按团队授权。
 
-| 兄弟产品 | 官网 | 场景 |
-|----------|------|------|
-| [SyncroBrain](https://syncrobrain.com) | [syncrobrain.com](https://syncrobrain.com) | 设备监控大屏、遥测数据集接入 |
-| [VistaCast](https://vistacast.dev) | [vistacast.dev](https://vistacast.dev) | 摄像头告警、客流与安防报表 |
-| [VistaRemote](https://remote.vistacast.dev) | [remote.vistacast.dev](https://remote.vistacast.dev) | 远程会话录制、AI 摘要报表 |
-| [DoerFlow](https://doerflow.dev) | [doerflow.dev](https://doerflow.dev) | Agent 运行指标、链上交易可视化 |
-| [BlockyEdu](https://blockyedu.com) | [blockyedu.com](https://blockyedu.com) | 创作漏斗 / 学情；**VibeLearn** 企业培训报表；SQL/可视化实训课 |
+## 使用时你一直带着的
 
-## 快速开始
+| 能力 | 你得到什么 |
+|------|------------|
+| **接已有的数** | PostgreSQL、MySQL 和 Excel 都可以作为数据源 |
+| **看板自己搭** | 拖拽布局、换主题，同一块屏可以给不同场合用 |
+| **按团队分开** | 空间、看板和数据集按组织授权，财务和现场不必看同一套 |
+| **问完能留下** | 问数的结果可以变成图表，留在看板上 |
+| **定时送到邮箱** | 订阅报表，按周期推送 |
+| **企业账号** | LuminaryWorks 统一登录，也可以换成公司自己的身份系统 |
 
-```bash
-git clone https://github.com/dataluminary/DataLuminary-Platform.git
-cd DataLuminary-Platform
-pnpm bootstrap    # 子仓、依赖、PostgreSQL、migrate、seed
-pnpm dev:talk       # DataTalk API
-pnpm dev:view       # DataView 前端
+## 和生态怎么配合
+
+```text
+DataLuminary
+  ├─► 经营分析 — 自有数据库和表格
+  ├─► SyncroBrain — 设备曲线和告警
+  ├─► VistaCast — 客流、安防和直通率
+  ├─► VistaRemote — 远程会话摘要
+  ├─► DoerFlow — 调用量和结算结果
+  └─► BlockyEdu — 学情和培训进度
 ```
 
-更多信息：[DataLuminary ONBOARDING](https://github.com/dataluminary/DataLuminary-Platform/blob/main/ONBOARDING.md) · [统一登录](/develop/unified-login) · [Auth Gateway](/develop/auth-gateway) · [通知模块](/develop/notification) · [AI 平台](/develop/ai-platform)
-
-产品站文档（ProductWhitePaper）：[AI 洞察](https://github.com/DataLuminary/ProductWhitePaper/blob/main/docs/product/ai-insights.md) · [AI 设计与实现](https://github.com/DataLuminary/ProductWhitePaper/blob/main/docs/develop/ai-insights.md)
+数据放在你们的环境里。谁能进哪个空间、看哪块看板，按你们的组织来。更多信息见 [dataluminary.dev](https://dataluminary.dev)。

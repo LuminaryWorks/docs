@@ -25,7 +25,7 @@ const products = [
   {
     badge: "视",
     name: "VistaCast · 视界云遥",
-    description: "兼容 ONVIF/RTSP 的 AI 摄像头云监控。",
+    description: "固定摄像头视觉事件：客流、安防与产线质检。",
     href: "/products/vistacast",
     logo: "/brand/vistacast-logo.svg",
   },

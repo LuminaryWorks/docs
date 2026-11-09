@@ -3,61 +3,55 @@
 ![SyncroBrain](/brand/syncrobrain-logo.svg)
 
 
-> 角色 **连** · 组织 [syncrobrain](https://github.com/syncrobrain) · 官网 [syncrobrain.com](https://syncrobrain.com) · MetaRepo [LuminaryIoTChain](https://github.com/syncrobrain/LuminaryIoTChain)
+> 角色 **连** · 组织 [syncrobrain](https://github.com/syncrobrain) · 官网 [syncrobrain.com](https://syncrobrain.com)
 
-开源、AI 驱动的 IoT PaaS：参考涂鸦类生态，以更低成本为硬件厂商提供设备接入、多租户控制台、规则引擎与 App 能力。Polyform-NC 核心栈，可私有化部署。
+设备连得上、状态看得清、告警交得出去，而且整套系统放在你们自己的环境里。
 
-## 核心能力
+SyncroBrain 是给硬件厂商和集成商的设备云。冷链、充储、工业传感和农业现场，用的是同一套接入、规则和控制台，按行业打开对应的能力包。一个项目、一块场地、一批设备，在控制台里分开管。
 
-| 模块 | 说明 |
-|------|------|
-| **设备接入** | MQTT（EMQX）、设备影子、OTA、多租户隔离 |
-| **规则引擎** | ThingsBoard CE 规则链 + 自定义 iot-gateway 编排 |
-| **控制台** | iot-console-web 设备管理、遥测、告警 |
-| **生态网关** | NestJS iot-gateway：JWT 验签、PAL、与 DataTalk / Agent 对接 |
-| **终端 App** | Flutter / React Native 终端模板，覆盖监控与控制场景 |
+## 行业方向
 
-设备、MQTT、规则留在产品内；可选 LLM 摘要见 [AI 平台](/develop/ai-platform)，不自建 IoT LLM 栈。
+### 冷链
 
-## 四层架构
+实验室冷藏、食品冷库、运输中的车辆和周转箱，都可以接进来。温度、门、断电、定位、围栏和冲击按条件告警；运输途中断网的数据会补传回来。值班记录和合规需要的数据可以导出。它负责把冷链现场管起来，运单和仓储系统仍用你们现有的。
 
-| 层 | 选型 | 职责 |
-|----|------|------|
-| Edge | ESPHome / Tasmota | 硬件标准化、OTA |
-| Pipe | EMQX (OSS) | 高并发 MQTT |
-| Brain | ThingsBoard CE + iot-gateway | 设备影子、规则、多租户、生态编排 |
-| Client | Flutter/RN + iot-console-web | 控制监控；DataTalk 图表嵌入 |
+### 充电与储能
 
-## 与闭源 IoT 云差异
+充电站能看到站、桩、枪和每一次充电会话，也能做功率限制和安全启停。储能看的是电量、健康度、功率和温度，充放电留在允许的范围内。支付清分和电力市场交易仍走你们自己的系统。
 
-- **开源可私有化**，许可与扩容成本更低
-- **不止设备管理**：AI 推理（[DoerFlow](https://doerflow.dev)）+ 专业大屏（[DataLuminary](https://dataluminary.dev)）+ 远程运维（[VistaRemote](https://remote.vistacast.dev)）+ 视觉 AI（[VistaCast](https://vistacast.dev)）
-- **BlockyEdu AI 辅助接入与标准玩具孪生**，缩短固件 / MQTT 联调周期；真机连接 / OTA 由 SyncroBrain 承载
-- **标准协议**：MQTT、REST、OIDC，无厂商锁定
+### 工业与楼宇
 
-## 核心链路
+传感器走常见的工业协议，模拟量和开关量都能进规则。楼宇窗户可以按手动、下雨关闭、高温留缝来控制。消费级的智能家居商城不是这条产品要做的事，它服务的是项目和场地。
+
+### 灌溉与鱼塘
+
+灌溉按分区控制阀门和水泵，土壤太干就开、下雨就停，并带干转保护。鱼塘按溶氧决定增氧，高温时喷水，水位不到位时不误动作。
+
+这些方向共用下面的平台能力。现场用哪一种，在项目里选。
+
+## 每天在用的
+
+| 你要做的事 | SyncroBrain 提供 |
+|------------|------------------|
+| 设备连上来 | 标准 MQTT。在线状态、下发的配置和设备上报放在一起 |
+| 按项目分开 | 厂商、项目和场地各自独立 |
+| 出了问题要知道 | 按阈值和条件告警，人在控制台里处理 |
+| 固件要更新 | 升级走这套系统自己的通道，记录留在对应项目里 |
+| 手机上也能看 | 监控和控制用的 App 模板 |
+| 员工怎么登录 | LuminaryWorks 账号，或你们公司的身份系统 |
+
+常见开源固件可以用来做试点。具体型号在项目里确认。
+
+## 和生态怎么配合
 
 ```text
-设备 ──MQTT──► EMQX ──► ThingsBoard / iot-gateway ──API──► 控制台 & App
-                              │
-                              ├──► DataLuminary 大屏
-                              ├──► DoerFlow 推理
-                              └──► VistaRemote 远程维护
+SyncroBrain
+  ├─► 冷链、充储、工业、楼宇、灌溉、鱼塘
+  ├─► DataLuminary — 给管理层的一块大屏
+  ├─► VistaCast — 摄像头看见的现场
+  ├─► VistaRemote — 人远程上工控机或网关
+  ├─► DoerFlow — 告警变成可结算的任务
+  └─► BlockyEdu — 工程师先在课里把设备调通
 ```
 
-## 数据存储
-
-- **OLTP**：PostgreSQL（`iot-gateway`，与 Logto / DataTalk 同栈）
-- **时序 / 分析**：ClickHouse 承载高吞吐遥测与分析查询
-
-选型说明：[数据存储 / PostgreSQL](/develop/datastore)
-
-## 快速开始
-
-```bash
-git clone https://github.com/syncrobrain/LuminaryIoTChain.git
-cd LuminaryIoTChain
-# 详见 ONBOARDING.md
-```
-
-更多信息：[SyncroBrain ONBOARDING](https://github.com/syncrobrain/LuminaryIoTChain/blob/main/ONBOARDING.md) · [统一登录](/develop/unified-login)
+设备和遥测留在你们的环境里。看板可以看告警，真正下发给设备的指令仍从 SyncroBrain 出去。更多信息见 [syncrobrain.com](https://syncrobrain.com)。

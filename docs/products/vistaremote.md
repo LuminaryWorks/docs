@@ -3,42 +3,54 @@
 ![VistaRemote](/brand/vistaremote-logo.svg)
 
 
-> 角色 **控** · 组织 [VistaRemote](https://github.com/VistaRemote) · 官网 [remote.vistacast.dev](https://remote.vistacast.dev) · MetaRepo [vibeCode](https://github.com/VistaRemote/vibeCode)
+> 角色 **控** · 组织 [VistaRemote](https://github.com/VistaRemote) · 官网 [remote.vistacast.dev](https://remote.vistacast.dev)
 
-WebRTC 实时远程桌面控制与自托管 AI 录制洞察。适配工控机、边缘网关、IT 桌面、客服远程协助等场景，可单独交付私有化运维产品。
+人在别处，也能连上那台工控机、网关或办公电脑，并把这次会话留下来。连上之后，还可以让 AI 在这块屏幕里帮忙操作。
 
-## 核心能力
+VistaRemote 用于远程维护、客服协助和需要审计的运维。会话、录制和操作记录放在你们自己的环境里。它可以单独使用；现场已经有摄像头时，再和 VistaCast 配合。
 
-| 模块 | 说明 |
-|------|------|
-| **实时控制** | WebRTC 低延迟远程桌面，支持多会话与权限分级 |
-| **AI 录制洞察** | 会话录制 + 自托管 AI 摘要、异常检测与检索；LLM 走 [AI 平台](/develop/ai-platform) 契约，默认不出网 |
-| **管理台** | 设备/会话管理、审计日志、PAL 权限 |
-| **多端** | Electron Agent、Web Client/Admin、React Native 主控 |
-| **统一登录** | LuminaryWorks OIDC，与企业 IdP 可替换 |
+## 四种会打开它的时候
 
-## 技术栈
+### 设备在现场，人在办公室
 
-- **信令 / 媒体**：WebRTC + 自托管 TURN
-- **后端**：NestJS + TypeORM + PostgreSQL
-- **前端**：React（Rsbuild）· Electron · React Native
+工控机、边缘网关和产线电脑不必等人到场。连上之后直接操作。一台机器可以按人和角色决定谁能进。
 
-## 与 VistaCast 的区别
+### 客服要看对方的屏幕
 
-[VistaCast](./vistacast) 为 **AI 固定摄像头云监控**（ONVIF），与本产品 **并存**：VistaCast 自动告警，VistaRemote 人工远程介入。
+协助同事或客户时，会话可以录下来。事后能回放这次操作，也能整理成摘要，方便交接和复查。
 
-## 在生态中
+### 让 AI 在这次会话里动手
 
-- 触达 IoT 设备、边缘网关、工控机的**远程运维入口**
-- 录制 → AI 摘要 → 结果写入 DataLuminary 报表
-- 与 SyncroBrain 设备台账联动
+会话已经由人建立之后，可以在旁边的助手里写一句话，例如打开某个页面、点某个按钮、填一行字。AI 通过这次会话的鼠标和键盘完成，人随时可以接手，助手会停下来。它不会自己新开一台远控，也不会从一条告警自动连上去。
 
-## 快速开始
+### 用你正在用的 AI 工具来操作
 
-```bash
-git clone https://github.com/VistaRemote/vibeCode.git
-cd vibeCode
-./init.ps1
+Cursor、ChatGPT 可以通过 MCP，操作你已经加入、并且允许 AI 协助的这一次会话：看当前画面、点击、输入、滚动。工具只进入这次会话，不能代替人去新开连接。键入内容和画面不会写成对外广播的审计正文。
+
+## 使用时你一直带着的
+
+| 能力 | 你得到什么 |
+|------|------------|
+| **远程桌面** | 连接工控机、网关和办公电脑 |
+| **多端主控** | 浏览器、桌面客户端和手机都可以发起 |
+| **按人和机器授权** | 能登录，不等于能连上每一台设备 |
+| **AI 协助** | 在已连接的会话里，用一句话完成屏幕上的操作 |
+| **MCP** | 本机的 Cursor、ChatGPT 操作当前这次会话 |
+| **录制和摘要** | 会话可以回放，也可以整理成便于复查的摘要 |
+| **留在自己的环境** | 会话、录制和审计保存在你们这边 |
+| **企业账号** | LuminaryWorks 统一登录，也可以换成公司自己的身份系统 |
+
+## 和生态怎么配合
+
+```text
+VistaRemote
+  ├─► 现场电脑与网关 — 人来操作，或让 AI 在这次会话里操作
+  ├─► Cursor / ChatGPT — 经 MCP 进入已经允许的会话
+  ├─► VistaCast — 摄像头先发现情况，人再上去处理
+  ├─► SyncroBrain — 从设备台账找到要连的那一台
+  └─► DataLuminary — 会话摘要进报表
 ```
 
-详见 [LuminaryWorks/spec/products/vistaremote.md](https://github.com/LuminaryWorks/LuminaryWorks/blob/main/spec/products/vistaremote.md)
+[VistaCast](./vistacast) 负责摄像头已经看见的客流、告警和质检。需要有人，或让 AI 在人已经连上的会话里操作那台机器时，打开 VistaRemote。
+
+更多信息见 [remote.vistacast.dev](https://remote.vistacast.dev)。

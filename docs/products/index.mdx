@@ -1,29 +1,47 @@
-# 六大产品概览
+# 六大产品
 
 import { ProductOverview } from "../../theme/ProductOverview";
 
-[LuminaryWorks（启明工坊）](https://luminaryworks.dev) 由六个**可独立部署、可单独商业化**的开源产品组成，覆盖创造/教育、物联、数据、视觉监控、远程运维与链上协作全链路。
+六个产品都可以单独采购、单独放在你自己的环境里，也可以按一条业务串起来。下面先看每个产品解决什么事，再看账号和数据怎么安排，最后看常见的组合。
 
 <ProductOverview />
 
-## VistaCast vs VistaRemote
+## 每个产品解决什么
 
-两条独立视觉产品线，分别服务自动感知与人工远程触达：
+| 产品 | 适合谁 | 你得到什么 |
+|------|--------|------------|
+| [BlockyEdu](./blockyedu) | 想把想法做成作品的人；要做内部培训的企业 | 创造：网站、小程序和标准玩具。企业大学：组织、必修、考试和证书。两件事可以分开买 |
+| [SyncroBrain](./syncrobrain) | 硬件厂商、集成商 | 自己的设备云：接入、状态、规则、告警和控制台。大屏和摄像头按项目再加 |
+| [DataLuminary](./dataluminary) | 要看经营和现场数字的团队 | 数据集、大屏，以及用一句话问出图表。空间权限跟着你的组织走 |
+| [VistaCast](./vistacast) | 已经有摄像头的门店、仓库和电子厂 | 客流、安防告警、产线外观记录。沿用现有相机，画面留在你这边 |
+| [VistaRemote](./vistaremote) | 要远程维护工控机、网关和办公桌面的团队 | 低延迟远程桌面、会话录制和审计。可以不买摄像头 |
+| [DoerFlow](./doerflow) | 要让 Agent 调用能力并结算的团队 | Agent、云资源和人工任务的统一调用与分成。套餐为 Pro、Ultra、Enterprise |
 
-| | VistaCast | VistaRemote |
-|---|-----------|-------------|
-| 输入 | ONVIF / RTSP 固定摄像头 | 远程桌面画面与控制流 |
-| 价值 | AI 自动告警、客流与安防分析 | 低延迟远程操作、录制与审计 |
-| 官网 | [vistacast.dev](https://vistacast.dev) | [remote.vistacast.dev](https://remote.vistacast.dev) |
-| 远期 | 跨摄像头 Re-ID、生态大屏与事件编排 | AI 会话摘要、企业级运维中台 |
+## 账号和数据
 
-## 共享基础设施
+员工用一套 LuminaryWorks 账号进入已经购买的产品，每个产品的登录页仍是自己的品牌。也可以换成你们公司的身份系统。
 
-| 能力 | 说明 |
-|------|------|
-| 统一身份 | 中央 Logto OIDC，六产品同一用户主体 |
-| 共享组件 | `@luminaryworks/*` 认证、权限与工程基线 |
-| 标准协议 | OIDC / MQTT / REST / WebRTC / ONVIF |
-| 宣传门户 | 本站 [luminaryworks.dev](https://luminaryworks.dev) |
+登录、套餐和「能看哪一块数据」是分开的。一个人已经登录，也购买了套餐，仍可能看不到某块看板、某台设备或某次会话，因为那份权限留在对应产品里。
 
-每个产品都能单独商业化；通过统一登录与标准协议可按需组合，形成从创造与学习到变现的完整闭环。
+每个产品保存自己的业务数据。看板上的数字来自各产品提供的结果，改看板不会改设备状态，也不会改一笔结算。一个产品升级或短暂停机，其他产品照常使用。
+
+视频画面、学员档案和钱包密钥留在各自产品所在的环境里。
+
+## 常见组合
+
+| 你在做的事 | 从这里开始 | 需要时再加 |
+|------------|------------|------------|
+| 企业内训 | BlockyEdu 企业大学 | DataLuminary 看学情 |
+| 学校和创客 | BlockyEdu 创造 | SyncroBrain 把作品连上真机 |
+| 自有设备云 | SyncroBrain | DataLuminary 做监控大屏 |
+| 门店人流 | VistaCast | DataLuminary 做成经营看板 |
+| 仓库值守 | VistaCast | VistaRemote，让人远程看现场 |
+| 产线外观记录 | VistaCast | 直通率放进 DataLuminary |
+| 远程运维留证 | VistaRemote | 录制摘要放进 DataLuminary |
+| Agent 调用和结算 | DoerFlow | 设备告警可以变成可计价的任务 |
+
+VistaCast 看的是摄像头，VistaRemote 连的是桌面。两件事情品牌分开，可以只买其中一个。
+
+开始使用时，DataLuminary、BlockyEdu、VistaRemote 提供 7 天试用，每个账号每个产品一次。DoerFlow 从 Pro 起售。VistaCast 和 SyncroBrain 按私有化项目交付。
+
+想看这些产品为什么能拆开买，读 [总体架构](/guide/architecture)。想看整条价值链，读 [生态叙事](/guide/ecosystem)。
